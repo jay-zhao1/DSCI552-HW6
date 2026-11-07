@@ -151,5 +151,5 @@ The former analysis-focused 20-page PDF, former notebook and scripts are archive
 
 `results/submission_format_audit.json` records the inspected format sources. `results/submission_core_audit.json` verifies semantic equivalence and unchanged results; `results/code_inclusive_notebook_execution.json` records the two new executed cells with zero errors. `results/code_inclusive_validation.json` records all core snippets, actual PDF font sizes, required coverage, page count and consistency checks. `results/report_pages/` contains every rendered final page. Optional ridge/lasso illustrative plots remain in the notebook; the PDF contains all required analytical subparts without those redundant optional illustrations.
 
-AI Usage Disclosure
+**AI Usage Disclosure**
 I used AI tools to help me learn the relevant programming techniques and machine learning concepts, understand code implementations, and assist with debugging.
