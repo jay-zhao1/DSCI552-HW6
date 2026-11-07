@@ -1,0 +1,20 @@
+{
+  "python": "3.12.8",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "cpu_count": 8,
+  "ram_gib": 16.0,
+  "available_ram_gib": 3.9661712646484375,
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "imbalanced-learn": "0.14.2",
+    "matplotlib": "3.11.2",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0",
+    "reportlab": "5.1.0"
+  },
+  "seed": 552,
+  "threads": 4
+}

@@ -1,0 +1,9 @@
+{
+  "seconds_this_invocation": 3.7767526659881696,
+  "completed_models": [
+    "rf_plain",
+    "rf_balanced",
+    "xgb_plain",
+    "xgb_smote"
+  ]
+}

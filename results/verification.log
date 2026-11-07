@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "rf_plain: saved probabilities independently recomputed from serialized estimator; all metrics agree",
+    "rf_balanced: saved probabilities independently recomputed from serialized estimator; all metrics agree",
+    "xgb_plain: saved probabilities independently recomputed from serialized estimator; all metrics agree",
+    "xgb_smote: saved probabilities independently recomputed from serialized estimator; all metrics agree",
+    "Official splits and feature order preserved; labels excluded",
+    "5 disjoint stratified validation folds cover every training row exactly once",
+    "Two complete 7 x 5 alpha searches; AP-selected alpha agrees with saved summaries",
+    "170 CVs recomputed with ddof=1; top 13 ranking and full correlation matrix verified",
+    "CV Pipeline fits on tr only; transforms va only; SMOTE is inside fit",
+    "Threshold is positive probability >= 0.5; AP is average_precision_score",
+    "Training scores refer to the original 60,000 observations"
+  ],
+  "all_passed": true
+}

@@ -1,0 +1,5 @@
+{
+  "training_csv_sha256": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da",
+  "test_csv_sha256": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3",
+  "provenance": "Hashes recorded during the initial pre-model data audit."
+}

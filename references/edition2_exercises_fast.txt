@@ -1,0 +1,374 @@
+PDF PAGE 294
+6.6 Exercises
+283
+Conceptual
+1. We perform best subset, forward stepwise, and backward stepwise
+selection on a single data set. For each approach, we obtain p + 1
+models, containing 0, 1, 2, . . . , p predictors. Explain your answers:
+(a) Which of the three models with k predictors has the smallest
+training RSS?
+(b) Which of the three models with k predictors has the smallest
+test RSS?
+(c) True or False:
+i. The predictors in the k-variable model identified by forward
+stepwise are a subset of the predictors in the (k+1)-variable
+model identified by forward stepwise selection.
+ii. The predictors in the k-variable model identified by back-
+ward stepwise are a subset of the predictors in the (k + 1)-
+variable model identified by backward stepwise selection.
+iii. The predictors in the k-variable model identified by back-
+ward stepwise are a subset of the predictors in the (k + 1)-
+variable model identified by forward stepwise selection.
+iv. The predictors in the k-variable model identified by forward
+stepwise are a subset of the predictors in the (k+1)-variable
+model identified by backward stepwise selection.
+v. The predictors in the k-variable model identified by best
+subset are a subset of the predictors in the (k + 1)-variable
+model identified by best subset selection.
+2. For parts (a) through (c), indicate which of i. through iv. is correct.
+Justify your answer.
+(a) The lasso, relative to least squares, is:
+i. More flexible and hence will give improved prediction ac-
+curacy when its increase in bias is less than its decrease in
+variance.
+ii. More flexible and hence will give improved prediction accu-
+racy when its increase in variance is less than its decrease
+in bias.
+iii. Less flexible and hence will give improved prediction accu-
+racy when its increase in bias is less than its decrease in
+variance.
+iv. Less flexible and hence will give improved prediction accu-
+racy when its increase in variance is less than its decrease
+in bias.
+(b) Repeat (a) for ridge regression relative to least squares.
+
+PDF PAGE 296
+6.6 Exercises
+285
+(b) Repeat (a) for test RSS.
+(c) Repeat (a) for variance.
+(d) Repeat (a) for (squared) bias.
+(e) Repeat (a) for the irreducible error.
+5. It is well-known that ridge regression tends to give similar coeﬀicient
+values to correlated variables, whereas the lasso may give quite dif-
+ferent coeﬀicient values to correlated variables. We will now explore
+this property in a very simple setting.
+Suppose that n = 2, p = 2, x11 = x12, x21 = x22. Furthermore,
+suppose that y1 +y2 = 0 and x11 +x21 = 0 and x12 +x22 = 0, so that
+the estimate for the intercept in a least squares, ridge regression, or
+lasso model is zero: ˆβ0 = 0.
+(a) Write out the ridge regression optimization problem in this set-
+ting.
+(b) Argue that in this setting, the ridge coeﬀicient estimates satisfy
+ˆβ1 = ˆβ2.
+(c) Write out the lasso optimization problem in this setting.
+(d) Argue that in this setting, the lasso coeﬀicients ˆβ1 and ˆβ2 are
+not unique—in other words, there are many possible solutions
+to the optimization problem in (c). Describe these solutions.
+6. We will now explore (6.12) and (6.13) further.
+(a) Consider (6.12) with p = 1. For some choice of y1 and λ > 0,
+plot (6.12) as a function of β1. Your plot should confirm that
+(6.12) is solved by (6.14).
+(b) Consider (6.13) with p = 1. For some choice of y1 and λ > 0,
+plot (6.13) as a function of β1. Your plot should confirm that
+(6.13) is solved by (6.15).
+7. We will now derive the Bayesian connection to the lasso and ridge
+regression discussed in Section 6.2.2.
+(a) Suppose that yi = β0+)p
+j=1 xijβj +ϵi where ϵ1, . . . , ϵn are inde-
+pendent and identically distributed from a N(0, σ2) distribution.
+Write out the likelihood for the data.
+(b) Assume the following prior for β: β1, . . . , βp are independent
+and identically distributed according to a double-exponential
+distribution with mean 0 and common scale parameter b: i.e.
+p(β) =
+1
+2b exp(−|β|/b). Write out the posterior for β in this
+setting.
+
+PDF PAGE 298
+6.6 Exercises
+287
+9. In this exercise, we will predict the number of applications received
+using the other variables in the College data set.
+(a) Split the data set into a training set and a test set.
+(b) Fit a linear model using least squares on the training set, and
+report the test error obtained.
+(c) Fit a ridge regression model on the training set, with λ chosen
+by cross-validation. Report the test error obtained.
+(d) Fit a lasso model on the training set, with λ chosen by cross-
+validation. Report the test error obtained, along with the num-
+ber of non-zero coeﬀicient estimates.
+(e) Fit a PCR model on the training set, with M chosen by cross-
+validation. Report the test error obtained, along with the value
+of M selected by cross-validation.
+(f) Fit a PLS model on the training set, with M chosen by cross-
+validation. Report the test error obtained, along with the value
+of M selected by cross-validation.
+(g) Comment on the results obtained. How accurately can we pre-
+dict the number of college applications received? Is there much
+difference among the test errors resulting from these five ap-
+proaches?
+10. We have seen that as the number of features used in a model increases,
+the training error will necessarily decrease, but the test error may not.
+We will now explore this in a simulated data set.
+(a) Generate a data set with p = 20 features, n = 1,000 observa-
+tions, and an associated quantitative response vector generated
+according to the model
+Y = Xβ + ϵ,
+where β has some elements that are exactly equal to zero.
+(b) Split your data set into a training set containing 100 observations
+and a test set containing 900 observations.
+(c) Perform best subset selection on the training set, and plot the
+training set MSE associated with the best model of each size.
+(d) Plot the test set MSE associated with the best model of each
+size.
+(e) For which model size does the test set MSE take on its minimum
+value? Comment on your results. If it takes on its minimum value
+for a model containing only an intercept or a model containing
+all of the features, then play around with the way that you are
+generating the data in (a) until you come up with a scenario in
+which the test set MSE is minimized for an intermediate model
+size.
+
+PDF PAGE 372
+8.4 Exercises
+361
+> xtest <- x[-train, ]
+> ytest <- y[-train]
+> set.seed(1)
+> bartfit <- gbart(xtrain, ytrain, x.test = xtest)
+Next we compute the test error.
+> yhat.bart <- bartfit$yhat.test.mean
+> mean((ytest - yhat.bart)^2)
+[1] 15.95
+On this data set, the test error of BART is lower than the test error of
+random forests and boosting.
+Now we can check how many times each variable appeared in the collec-
+tion of trees.
+> ord <- order(bartfit$varcount.mean, decreasing = T)
+> bartfit$varcount.mean[ord]
+nox
+lstat
+tax
+rad
+rm
+indus
+chas ptratio
+22.95
+21.33
+21.25
+20.78
+19.89
+19.82
+19.05
+18.98
+age
+zn
+dis
+crim
+18.27
+15.95
+14.46
+11.01
+8.4
+Exercises
+Conceptual
+1. Draw an example (of your own invention) of a partition of two-
+dimensional feature space that could result from recursive binary
+splitting. Your example should contain at least six regions. Draw a
+decision tree corresponding to this partition. Be sure to label all as-
+pects of your figures, including the regions R1, R2, . . ., the cutpoints
+t1, t2, . . ., and so forth.
+Hint: Your result should look something like Figures 8.1 and 8.2.
+2. It is mentioned in Section 8.2.3 that boosting using depth-one trees
+(or stumps) leads to an additive model: that is, a model of the form
+f(X) =
+p
+0
+j=1
+fj(Xj).
+Explain why this is the case. You can begin with (8.12) in
+Algorithm 8.2.
+3. Consider the Gini index, classification error, and entropy in a simple
+classification setting with two classes. Create a single plot that dis-
+plays each of these quantities as a function of ˆpm1. The x-axis should
+
+PDF PAGE 374
+8.4 Exercises
+363
+Applied
+7. In the lab, we applied random forests to the Boston data using mtry =
+6 and using ntree = 25 and ntree = 500. Create a plot displaying the
+test error resulting from random forests on this data set for a more
+comprehensive range of values for mtry and ntree. You can model
+your plot after Figure 8.10. Describe the results obtained.
+8. In the lab, a classification tree was applied to the Carseats data set af-
+ter converting Sales into a qualitative response variable. Now we will
+seek to predict Sales using regression trees and related approaches,
+treating the response as a quantitative variable.
+(a) Split the data set into a training set and a test set.
+(b) Fit a regression tree to the training set. Plot the tree, and inter-
+pret the results. What test MSE do you obtain?
+(c) Use cross-validation in order to determine the optimal level of
+tree complexity. Does pruning the tree improve the test MSE?
+(d) Use the bagging approach in order to analyze this data. What
+test MSE do you obtain? Use the importance() function to de-
+termine which variables are most important.
+(e) Use random forests to analyze this data. What test MSE do you
+obtain? Use the importance() function to determine which vari-
+ables are most important. Describe the effect of m, the number of
+variables
+considered
+at
+each
+split,
+on
+the
+error
+rate
+obtained.
+(f) Now analyze the data using BART, and report your results.
+9. This problem involves the OJ data set which is part of the ISLR2
+package.
+(a) Create a training set containing a random sample of 800 obser-
+vations, and a test set containing the remaining observations.
+(b) Fit a tree to the training data, with Purchase as the response
+and the other variables as predictors. Use the summary() function
+to produce summary statistics about the tree, and describe the
+results obtained. What is the training error rate? How many
+terminal nodes does the tree have?
+(c) Type in the name of the tree object in order to get a detailed
+text output. Pick one of the terminal nodes, and interpret the
+information displayed.
+(d) Create a plot of the tree, and interpret the results.
+(e) Predict the response on the test data, and produce a confusion
+matrix comparing the test labels to the predicted test labels.
+What is the test error rate?
+
+PDF PAGE 376
+8.4 Exercises
+365
+(c) Use the boosting model to predict the response on the test data.
+Predict that a person will make a purchase if the estimated prob-
+ability of purchase is greater than 20 %. Form a confusion ma-
+trix. What fraction of the people predicted to make a purchase
+do in fact make one? How does this compare with the results
+obtained from applying KNN or logistic regression to this data
+set?
+12. Apply boosting, bagging, random forests, and BART to a data set
+of your choice. Be sure to fit the models on a training set and to
+evaluate their performance on a test set. How accurate are the results
+compared to simple methods like linear or logistic regression? Which
+of these approaches yields the best performance?
+
+PDF PAGE 410
+9.7 Exercises
+399
+(a) We are given n = 7 observations in p = 2 dimensions. For each
+observation, there is an associated class label.
+Obs.
+X1
+X2
+Y
+1
+3
+4
+Red
+2
+2
+2
+Red
+3
+4
+4
+Red
+4
+1
+4
+Red
+5
+2
+1
+Blue
+6
+4
+3
+Blue
+7
+4
+1
+Blue
+Sketch the observations.
+(b) Sketch the optimal separating hyperplane, and provide the equa-
+tion for this hyperplane (of the form (9.1)).
+(c) Describe the classification rule for the maximal margin classifier.
+It should be something along the lines of “Classify to Red if
+β0 + β1X1 + β2X2 > 0, and classify to Blue otherwise.” Provide
+the values for β0, β1, and β2.
+(d) On your sketch, indicate the margin for the maximal margin
+hyperplane.
+(e) Indicate the support vectors for the maximal margin classifier.
+(f) Argue that a slight movement of the seventh observation would
+not affect the maximal margin hyperplane.
+(g) Sketch a hyperplane that is not the optimal separating hyper-
+plane, and provide the equation for this hyperplane.
+(h) Draw an additional observation on the plot so that the two
+classes are no longer separable by a hyperplane.
+Applied
+4. Generate a simulated two-class data set with 100 observations and
+two features in which there is a visible but non-linear separation be-
+tween the two classes. Show that in this setting, a support vector
+machine with a polynomial kernel (with degree greater than 1) or a
+radial kernel will outperform a support vector classifier on the train-
+ing data. Which technique performs best on the test data? Make
+plots and report training and test error rates in order to back up
+your assertions.
+5. We have seen that we can fit an SVM with a non-linear kernel in order
+to perform classification using a non-linear decision boundary. We will
+now see that we can also obtain a non-linear decision boundary by
+performing logistic regression using non-linear transformations of the
+features.
+
+PDF PAGE 412
+9.7 Exercises
+401
+(b) Compute the cross-validation error rates for support vector
+classifiers with a range of cost values. How many training obser-
+vations are misclassified for each value of cost considered, and
+how does this relate to the cross-validation errors obtained?
+(c) Generate an appropriate test data set, and compute the test
+errors corresponding to each of the values of cost considered.
+Which value of cost leads to the fewest test errors, and how
+does this compare to the values of cost that yield the fewest
+training errors and the fewest cross-validation errors?
+(d) Discuss your results.
+7. In this problem, you will use support vector approaches in order to
+predict whether a given car gets high or low gas mileage based on the
+Auto data set.
+(a) Create a binary variable that takes on a 1 for cars with gas
+mileage above the median, and a 0 for cars with gas mileage
+below the median.
+(b) Fit a support vector classifier to the data with various values
+of cost, in order to predict whether a car gets high or low gas
+mileage. Report the cross-validation errors associated with dif-
+ferent values of this parameter. Comment on your results. Note
+you will need to fit the classifier without the gas mileage variable
+to produce sensible results.
+(c) Now repeat (b), this time using SVMs with radial and polyno-
+mial basis kernels, with different values of gamma and degree and
+cost. Comment on your results.
+(d) Make some plots to back up your assertions in (b) and (c).
+Hint: In the lab, we used the plot() function for svm objects
+only in cases with p = 2. When p > 2, you can use the plot()
+function to create plots displaying pairs of variables at a time.
+Essentially, instead of typing
+> plot(svmfit, dat)
+where svmfit contains your fitted model and dat is a data frame
+containing your data, you can type
+> plot(svmfit, dat, x1 ∼x4)
+in order to plot just the first and fourth variables. However, you
+must replace x1 and x4 with the correct variable names. To find
+out more, type ?plot.svm.
+8. This problem involves the OJ data set which is part of the ISLR2
+package.
