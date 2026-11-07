@@ -49,6 +49,11 @@ print("Q4 Red votes:", (probs>.5).sum(), "; average Red probability:", probs.mea
 print("Q5 independent SVM verification:", (R / "q5_verification.json").read_text())''')
  md('## Final independent checks\n\nRecompute all saved metrics, reload serialized estimators to reproduce official-test probabilities, and check fold membership, CV selection, feature CVs, shapes and correlation symmetry.')
  code('from verify import verify\nvalidation = verify()\nassert validation["all_passed"]\nprint("All necessary saved-result checks passed.")')
+ from extra_practice import extra_notebook_cells, run_extra
+ run_extra()
+ cells.extend(extra_notebook_cells())
+ from update_code_notebook import code_cells
+ cells.extend(code_cells())
  nb.cells=cells;nb.metadata={'kernelspec':{'display_name':'Python 3 (DSCI552 .venv)','language':'python','name':'python3'},'language_info':{'name':'python','version':sys.version.split()[0]}}
  path=ROOT/'DSCI552_Homework6.ipynb';nbf.write(nb,path)
  if execute:

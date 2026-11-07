@@ -1,0 +1,10 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+{
+  "new_code_cells": 2,
+  "errors": 0,
+  "previous_cells_preserved_verbatim": true,
+  "previous_code_cells": 28,
+  "total_code_cells": 30,
+  "aps_models_retrained": false,
+  "execution_mode": "New compact core and independent audit only, in a fresh kernel."
+}

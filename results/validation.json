@@ -13,12 +13,133 @@
     "Training scores refer to the original 60,000 observations"
   ],
   "all_passed": true,
-  "notebook_executed_code_cells": 20,
+  "notebook_executed_code_cells": 30,
   "notebook_errors": 0,
-  "pdf_pages": 17,
+  "pdf_pages": 20,
   "pdf_within_20_page_limit": true,
   "original_csv_hashes_unchanged": true,
   "report_sections_in_expected_pages": true,
+  "extra_practice": {
+    "all_passed": true,
+    "formal_notebook_code_and_outputs_unchanged": true,
+    "original_code_cells": 20,
+    "new_executed_code_cells": 8,
+    "notebook_errors": 0,
+    "original_experiment_files_hash_verified": 21,
+    "model_retraining_performed": false,
+    "all_four_extra_exercises_complete": true,
+    "exercise_statement_ambiguities": [],
+    "main_report_pages": 20,
+    "extra_practice_pages": [
+      12,
+      16,
+      17,
+      18,
+      19
+    ],
+    "organization": "merged into main report",
+    "bootstrap_and_ridge_numeric_checks_passed": true,
+    "tree_grid_points_checked": 6561,
+    "circle_classifications_verified": true,
+    "report_text_bounds_and_replacement_character_checks_passed": true
+  },
+  "code_inclusive": {
+    "all_passed": true,
+    "pdf_pages": 20,
+    "body_font_pt": 10.4,
+    "code_font_pt": 8.7,
+    "code_leading_pt": 10.2,
+    "core_code_lines_printed": 285,
+    "code_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19
+    ],
+    "all_printed_code_and_output_lines_found_in_pdf": true,
+    "code_compiles_and_indentation_preserved": true,
+    "code_font_sizes_observed": [
+      8.7,
+      8.8
+    ],
+    "all_text_within_page": true,
+    "required_item_pages": {
+      "data_and_cv": [
+        1
+      ],
+      "correlation": [
+        2
+      ],
+      "scatter_box_imbalance": [
+        3,
+        4
+      ],
+      "rf_training_evaluation_oob": [
+        5,
+        6
+      ],
+      "xgb_parameters_and_pipeline": [
+        7
+      ],
+      "fold_local_smote_and_alpha_selection": [
+        7,
+        8
+      ],
+      "xgb_final_results": [
+        9,
+        10
+      ],
+      "comparison_and_sensitivity": [
+        11
+      ],
+      "q2_and_extra_ridge_all_parts": [
+        12
+      ],
+      "q3_all_parts": [
+        13
+      ],
+      "q4": [
+        14
+      ],
+      "q5_all_parts": [
+        14,
+        15
+      ],
+      "extra_bootstrap_all_parts": [
+        16
+      ],
+      "extra_trees_both_parts": [
+        17,
+        18
+      ],
+      "extra_circle_all_parts": [
+        19
+      ],
+      "references": [
+        20
+      ]
+    },
+    "notebook_executed_code_cells": 30,
+    "notebook_errors": 0,
+    "previous_notebook_cells_preserved_verbatim": true,
+    "saved_experiment_files_unchanged": 25,
+    "aps_models_retrained_this_revision": false,
+    "core_equivalence_audit_passed": true,
+    "format_audit": "No explicit local font/margin mandate found; chosen settings are documented.",
+    "remaining_issue": "Original Q1(e-f) logistic model tree wording; standard gbtree interpretation explicitly distinguished."
+  },
   "visual_qa": {
     "reviewed_pages": [
       1,
@@ -37,10 +158,15 @@
       14,
       15,
       16,
-      17
+      17,
+      18,
+      19,
+      20
     ],
-    "all_pages_rendered": true,
-    "final_q5_legend_outside_data": true,
-    "clipping_overlap_or_blank_pages_found": false
+    "all_final_pages_rendered": true,
+    "code_indentation_and_line_breaks_checked": true,
+    "formulas_and_chart_labels_checked": true,
+    "clipping_overlap_or_blank_pages_found": false,
+    "review_basis": "All five final contact sheets visually inspected after the final PDF rebuild; code/output lines also checked against selectable PDF text."
   }
 }

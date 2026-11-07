@@ -1,0 +1,127 @@
+{
+  "all_passed": true,
+  "pdf_pages": 20,
+  "body_font_pt": 10.4,
+  "code_font_pt": 8.7,
+  "code_leading_pt": 10.2,
+  "core_code_lines_printed": 285,
+  "code_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17,
+    19
+  ],
+  "all_printed_code_and_output_lines_found_in_pdf": true,
+  "code_compiles_and_indentation_preserved": true,
+  "code_font_sizes_observed": [
+    8.7,
+    8.8
+  ],
+  "all_text_within_page": true,
+  "required_item_pages": {
+    "data_and_cv": [
+      1
+    ],
+    "correlation": [
+      2
+    ],
+    "scatter_box_imbalance": [
+      3,
+      4
+    ],
+    "rf_training_evaluation_oob": [
+      5,
+      6
+    ],
+    "xgb_parameters_and_pipeline": [
+      7
+    ],
+    "fold_local_smote_and_alpha_selection": [
+      7,
+      8
+    ],
+    "xgb_final_results": [
+      9,
+      10
+    ],
+    "comparison_and_sensitivity": [
+      11
+    ],
+    "q2_and_extra_ridge_all_parts": [
+      12
+    ],
+    "q3_all_parts": [
+      13
+    ],
+    "q4": [
+      14
+    ],
+    "q5_all_parts": [
+      14,
+      15
+    ],
+    "extra_bootstrap_all_parts": [
+      16
+    ],
+    "extra_trees_both_parts": [
+      17,
+      18
+    ],
+    "extra_circle_all_parts": [
+      19
+    ],
+    "references": [
+      20
+    ]
+  },
+  "notebook_executed_code_cells": 30,
+  "notebook_errors": 0,
+  "previous_notebook_cells_preserved_verbatim": true,
+  "saved_experiment_files_unchanged": 25,
+  "aps_models_retrained_this_revision": false,
+  "core_equivalence_audit_passed": true,
+  "format_audit": "No explicit local font/margin mandate found; chosen settings are documented.",
+  "remaining_issue": "Original Q1(e-f) logistic model tree wording; standard gbtree interpretation explicitly distinguished.",
+  "visual_qa": {
+    "reviewed_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "all_final_pages_rendered": true,
+    "code_indentation_and_line_breaks_checked": true,
+    "formulas_and_chart_labels_checked": true,
+    "clipping_overlap_or_blank_pages_found": false,
+    "review_basis": "All five final contact sheets visually inspected after the final PDF rebuild; code/output lines also checked against selectable PDF text."
+  },
+  "final_pdf_sha256": "79f8d48840db8f2d2d02155c913ddb856feaedffa5b8e7237cebad96d38134fb"
+}

@@ -1,0 +1,57 @@
+{
+  "bootstrap": {
+    "seed": 552,
+    "replicates": 10000,
+    "sample_size": 100,
+    "observation_j": 4,
+    "inclusion_count": 6238,
+    "empirical_probability": 0.6238,
+    "exact_probability": 0.6339676587267705,
+    "monte_carlo_standard_error": 0.0048171845139590354,
+    "standardized_difference": -2.1107056823974846,
+    "exact_requested": {
+      "5": 0.67232,
+      "100": 0.6339676587267705,
+      "10000": 0.6321389535670702
+    },
+    "limit": 0.6321205588285577
+  },
+  "ridge": {
+    "design": "X = diag(4,2,1), beta = (2,-1,0.7), Gaussian noise variance = 1, known zero intercept, isotropic test covariates",
+    "seed": 552,
+    "response": [
+      9.695131952201761,
+      -2.0092186909731895,
+      0.8647655450579655
+    ],
+    "training_rss_nondecreasing": true,
+    "variance_nonincreasing": true,
+    "squared_bias_nondecreasing": true
+  },
+  "tree": {
+    "grid_points_checked": 6561,
+    "tree_and_partition_agree": true,
+    "cut_convention": "less-than true branch; equality goes to false branch"
+  },
+  "circle": {
+    "center": [
+      -1,
+      2
+    ],
+    "radius": 2,
+    "requested_classes": [
+      "Blue",
+      "Red",
+      "Blue",
+      "Blue"
+    ],
+    "polynomial_coefficients_intercept_X1_X1sq_X2_X2sq": [
+      1,
+      2,
+      1,
+      -4,
+      1
+    ]
+  },
+  "all_passed": true
+}

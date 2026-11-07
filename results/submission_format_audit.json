@@ -1,0 +1,17 @@
+{
+  "sources": [
+    "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw6/Homework6.pdf",
+    "/Users/a0000/Desktop/mac/usc/2026fall/ds552/8:24/syllabusDSCI552new.pdf",
+    "/Users/a0000/Desktop/mac/usc/2026fall/ds552/8:24/Lesson-1_introduction.pdf"
+  ],
+  "explicit_font_or_margin_rule_found": false,
+  "page_limit_basis": "User correction: all code, answers, outputs and references count toward 20 pages.",
+  "chosen_body_pt": 10.4,
+  "chosen_code_pt": 8.7,
+  "chosen_margins_pt": {
+    "left": 36,
+    "right": 36,
+    "top": 32,
+    "bottom": 38
+  }
+}

@@ -1,0 +1,348 @@
+PDF page 212
+5.4 Exercises
+197
+> boot.fn=function (data ,index )
++ coefficients(lm(mpg∼horsepower +I( horsepower ^2) ,data=data ,
+subset =index))
+> set.seed (1)
+> boot(Auto ,boot.fn ,1000)
+ORDINARY
+NONPARAMETRIC BOOTSTRAP
+Call:
+boot(data = Auto , statistic
+= boot.fn, R = 1000)
+Bootstrap
+Statistics
+:
+original
+bias
+std. error
+t1*
+56.900
+6.098e -03
+2.0945
+t2*
+-0.466
+-1.777e -04
+0.0334
+t3*
+0.001
+1.324e -06
+0.0001
+> summary (lm(mpg∼horsepower +I(horsepower ^2) ,data=Auto))$coef
+Estimate
+Std. Error t value
+Pr(>|t|)
+(Intercept )
+56.9001
+1.80043
+32 1.7e-109
+horsepower
+-0.4662
+0.03112
+-15
+2.3e-40
+I(horsepower ^2)
+0.0012
+0.00012
+10
+2.2e-21
+5.4
+Exercises
+Conceptual
+1. Using basic statistical properties of the variance, as well as single-
+variable calculus, derive (5.6). In other words, prove that α given by
+(5.6) does indeed minimize Var(αX + (1 −α)Y ).
+2. We will now derive the probability that a given observation is part
+of a bootstrap sample. Suppose that we obtain a bootstrap sample
+from a set of n observations.
+(a) What is the probability that the ﬁrst bootstrap observation is
+not the jth observation from the original sample? Justify your
+answer.
+(b) What is the probability that the second bootstrap observation
+is not the jth observation from the original sample?
+(c) Argue that the probability that the jth observation is not in the
+bootstrap sample is (1 −1/n)n.
+(d) When n = 5, what is the probability that the jth observation is
+in the bootstrap sample?
+(e) When n = 100, what is the probability that the jth observation
+is in the bootstrap sample?
+
+PDF page 213
+198
+5. Resampling Methods
+(f) When n = 10, 000, what is the probability that the jth observa-
+tion is in the bootstrap sample?
+(g) Create a plot that displays, for each integer value of n from 1
+to 100, 000, the probability that the jth observation is in the
+bootstrap sample. Comment on what you observe.
+(h) We will now investigate numerically the probability that a boot-
+strap sample of size n = 100 contains the jth observation. Here
+j = 4. We repeatedly create bootstrap samples, and each time
+we record whether or not the fourth observation is contained in
+the bootstrap sample.
+> store=rep (NA , 10000)
+> for (i in 1:10000) {
+store[i]=sum(sample (1:100 ,
+rep =TRUE)==4) >0
+}
+> mean(store)
+Comment on the results obtained.
+3. We now review k-fold cross-validation.
+(a) Explain how k-fold cross-validation is implemented.
+(b) What are the advantages and disadvantages of k-fold cross-
+validation relative to:
+i. The validation set approach?
+ii. LOOCV?
+4. Suppose that we use some statistical learning method to make a pre-
+diction for the response Y for a particular value of the predictor X.
+Carefully describe how we might estimate the standard deviation of
+our prediction.
+Applied
+5. In Chapter 4, we used logistic regression to predict the probability of
+default using income and balance on the Default data set. We will
+now estimate the test error of this logistic regression model using the
+validation set approach. Do not forget to set a random seed before
+beginning your analysis.
+(a) Fit a logistic regression model that uses income and balance to
+predict default.
+(b) Using the validation set approach, estimate the test error of this
+model. In order to do this, you must perform the following steps:
+i. Split the sample set into a training set and a validation set.
+
+PDF page 275
+260
+6. Linear Model Selection and Regularization
+iii. Less ﬂexible and hence will give improved prediction accu-
+racy when its increase in bias is less than its decrease in
+variance.
+iv. Less ﬂexible and hence will give improved prediction accu-
+racy when its increase in variance is less than its decrease
+in bias.
+(b) Repeat (a) for ridge regression relative to least squares.
+(c) Repeat (a) for non-linear methods relative to least squares.
+3. Suppose we estimate the regression coeﬃcients in a linear regression
+model by minimizing
+n
+
+i=1
+⎛
+⎝yi −β0 −
+p
+
+j=1
+βjxij
+⎞
+⎠
+2
+subject to
+p
+
+j=1
+|βj| ≤s
+for a particular value of s. For parts (a) through (e), indicate which
+of i. through v. is correct. Justify your answer.
+(a) As we increase s from 0, the training RSS will:
+i. Increase initially, and then eventually start decreasing in an
+inverted U shape.
+ii. Decrease initially, and then eventually start increasing in a
+U shape.
+iii. Steadily increase.
+iv. Steadily decrease.
+v. Remain constant.
+(b) Repeat (a) for test RSS.
+(c) Repeat (a) for variance.
+(d) Repeat (a) for (squared) bias.
+(e) Repeat (a) for the irreducible error.
+4. Suppose we estimate the regression coeﬃcients in a linear regression
+model by minimizing
+n
+
+i=1
+⎛
+⎝yi −β0 −
+p
+
+j=1
+βjxij
+⎞
+⎠
+2
++ λ
+p
+
+j=1
+β2
+j
+for a particular value of λ. For parts (a) through (e), indicate which
+of i. through v. is correct. Justify your answer.
+
+PDF page 276
+6.8 Exercises
+261
+(a) As we increase λ from 0, the training RSS will:
+i. Increase initially, and then eventually start decreasing in an
+inverted U shape.
+ii. Decrease initially, and then eventually start increasing in a
+U shape.
+iii. Steadily increase.
+iv. Steadily decrease.
+v. Remain constant.
+(b) Repeat (a) for test RSS.
+(c) Repeat (a) for variance.
+(d) Repeat (a) for (squared) bias.
+(e) Repeat (a) for the irreducible error.
+5. It is well-known that ridge regression tends to give similar coeﬃcient
+values to correlated variables, whereas the lasso may give quite dif-
+ferent coeﬃcient values to correlated variables. We will now explore
+this property in a very simple setting.
+Suppose that n = 2, p = 2, x11 = x12, x21 = x22. Furthermore,
+suppose that y1 +y2 = 0 and x11 +x21 = 0 and x12 +x22 = 0, so that
+the estimate for the intercept in a least squares, ridge regression, or
+lasso model is zero: ˆβ0 = 0.
+(a) Write out the ridge regression optimization problem in this set-
+ting.
+(b) Argue that in this setting, the ridge coeﬃcient estimates satisfy
+ˆβ1 = ˆβ2.
+(c) Write out the lasso optimization problem in this setting.
+(d) Argue that in this setting, the lasso coeﬃcients ˆβ1 and ˆβ2 are
+not unique—in other words, there are many possible solutions
+to the optimization problem in (c). Describe these solutions.
+6. We will now explore (6.12) and (6.13) further.
+(a) Consider (6.12) with p = 1. For some choice of y1 and λ > 0,
+plot (6.12) as a function of β1. Your plot should conﬁrm that
+(6.12) is solved by (6.14).
+(b) Consider (6.13) with p = 1. For some choice of y1 and λ > 0,
+plot (6.13) as a function of β1. Your plot should conﬁrm that
+(6.13) is solved by (6.15).
+
+PDF page 347
+332
+8. Tree-Based Methods
+8.4
+Exercises
+Conceptual
+1. Draw an example (of your own invention) of a partition of two-
+dimensional feature space that could result from recursive binary
+splitting. Your example should contain at least six regions. Draw a
+decision tree corresponding to this partition. Be sure to label all as-
+pects of your ﬁgures, including the regions R1, R2, . . ., the cutpoints
+t1, t2, . . ., and so forth.
+Hint: Your result should look something like Figures 8.1 and 8.2.
+2. It is mentioned in Section 8.2.3 that boosting using depth-one trees
+(or stumps) leads to an additive model: that is, a model of the form
+f(X) =
+p
+
+j=1
+fj(Xj).
+Explain why this is the case. You can begin with (8.12) in
+Algorithm 8.2.
+3. Consider the Gini index, classiﬁcation error, and entropy in a
+simple classiﬁcation setting with two classes. Create a single plot
+that displays each of these quantities as a function of ˆpm1. The x-
+axis should display ˆpm1, ranging from 0 to 1, and the y-axis should
+display the value of the Gini index, classiﬁcation error, and entropy.
+Hint: In a setting with two classes, ˆpm1 = 1 −ˆpm2. You could make
+this plot by hand, but it will be much easier to make in R.
+4. This question relates to the plots in Figure 8.12.
+(a) Sketch the tree corresponding to the partition of the predictor
+space illustrated in the left-hand panel of Figure 8.12. The num-
+bers inside the boxes indicate the mean of Y within each region.
+(b) Create a diagram similar to the left-hand panel of Figure 8.12,
+using the tree illustrated in the right-hand panel of the same
+ﬁgure. You should divide up the predictor space into the correct
+regions, and indicate the mean for each region.
+5. Suppose we produce ten bootstrapped samples from a data set
+containing red and green classes. We then apply a classiﬁcation tree
+to each bootstrapped sample and, for a speciﬁc value of X, produce
+10 estimates of P(Class is Red|X):
+0.1, 0.15, 0.2, 0.2, 0.55, 0.6, 0.6, 0.65, 0.7, and 0.75.
+
+PDF page 348
+8.4 Exercises
+333
+5
+15
+0
+10
+3
+0
+1
+X1
+X2
+1
+0
+X2 < 1
+X1 < 1
+X1 < 0
+X2 < 2
+2.49
+0.21
+0.63
+−1.06
+−1.80
+FIGURE 8.12. Left: A partition of the predictor space corresponding to Exer-
+cise 4a. Right: A tree corresponding to Exercise 4b.
+There are two common ways to combine these results together into a
+single class prediction. One is the majority vote approach discussed in
+this chapter. The second approach is to classify based on the average
+probability. In this example, what is the ﬁnal classiﬁcation under each
+of these two approaches?
+6. Provide a detailed explanation of the algorithm that is used to ﬁt a
+regression tree.
+Applied
+7. In the lab, we applied random forests to the Boston data using mtry=6
+and using ntree=25 and ntree=500. Create a plot displaying the test
+error resulting from random forests on this data set for a more com-
+prehensive range of values for mtry and ntree. You can model your
+plot after Figure 8.10. Describe the results obtained.
+8. In the lab, a classiﬁcation tree was applied to the Carseats data set af-
+ter converting Sales into a qualitative response variable. Now we will
+seek to predict Sales using regression trees and related approaches,
+treating the response as a quantitative variable.
+(a) Split the data set into a training set and a test set.
+(b) Fit a regression tree to the training set. Plot the tree, and inter-
+pret the results. What test MSE do you obtain?
+(c) Use cross-validation in order to determine the optimal level of
+tree complexity. Does pruning the tree improve the test MSE?
+(d) Use the bagging approach in order to analyze this data. What
+test MSE do you obtain? Use the importance() function to de-
+termine which variables are most important.
+
+PDF page 383
+368
+9. Support Vector Machines
+We see that using cost=10 yields two test set errors on this data.
+9.7
+Exercises
+Conceptual
+1. This problem involves hyperplanes in two dimensions.
+(a) Sketch the hyperplane 1 + 3X1 −X2 = 0. Indicate the set of
+points for which 1 + 3X1 −X2 > 0, as well as the set of points
+for which 1 + 3X1 −X2 < 0.
+(b) On the same plot, sketch the hyperplane −2 + X1 + 2X2 = 0.
+Indicate the set of points for which −2 + X1 + 2X2 > 0, as well
+as the set of points for which −2 + X1 + 2X2 < 0.
+2. We have seen that in p = 2 dimensions, a linear decision boundary
+takes the form β0+β1X1+β2X2 = 0. We now investigate a non-linear
+decision boundary.
+(a) Sketch the curve
+(1 + X1)2 + (2 −X2)2 = 4.
+(b) On your sketch, indicate the set of points for which
+(1 + X1)2 + (2 −X2)2 > 4,
+as well as the set of points for which
+(1 + X1)2 + (2 −X2)2 ≤4.
+(c) Suppose that a classiﬁer assigns an observation to the blue class
+if
+(1 + X1)2 + (2 −X2)2 > 4,
+and to the red class otherwise. To what class is the observation
+(0, 0) classiﬁed? (−1, 1)? (2, 2)? (3, 8)?
+(d) Argue that while the decision boundary in (c) is not linear in
+terms of X1 and X2, it is linear in terms of X1, X2
+1, X2, and
+X2
+2.
+3. Here we explore the maximal margin classiﬁer on a toy data set.
+(a) We are given n = 7 observations in p = 2 dimensions. For each
+observation, there is an associated class label.

@@ -25,5 +25,33 @@
   ],
   "errors": 0,
   "checkpoint_reuse": true,
-  "figures_regenerated": true
+  "figures_regenerated": true,
+  "extra_practice": {
+    "extra_code_cells": 8,
+    "extra_execution_counts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "errors": 0,
+    "execution_mode": "Only new Question 6 cells executed in a fresh kernel; original Q1-5 code and outputs preserved verbatim.",
+    "original_code_cells_unchanged": true,
+    "original_code_cells": 20,
+    "total_code_cells": 28
+  },
+  "total_code_cells": 30,
+  "code_inclusive_revision": {
+    "new_code_cells": 2,
+    "errors": 0,
+    "previous_cells_preserved_verbatim": true,
+    "previous_code_cells": 28,
+    "total_code_cells": 30,
+    "aps_models_retrained": false,
+    "execution_mode": "New compact core and independent audit only, in a fresh kernel."
+  }
 }
