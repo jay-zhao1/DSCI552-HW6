@@ -1,0 +1,8 @@
+{
+  "no_files_staged": true,
+  "no_commit_push_or_course_submission": true,
+  "new_unignored_files_do_not_include_virtualenv_tmp_bytecode_archives_or_joblib": true,
+  "existing_tracked_generated_files": "Pre-existing tracked tmp/ and bytecode files are not untracked/reset by this task; .gitignore applies only to new untracked files.",
+  "preservation": "Original worktree edits retained; historical experiment hashes independently verified.",
+  "pdf_sha256": "9b39a47326e13a1741413467c3083f0ecb800d64c0a94ce12574f823e1eff69f"
+}

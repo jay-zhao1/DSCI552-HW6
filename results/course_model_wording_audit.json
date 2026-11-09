@@ -1,0 +1,69 @@
+{
+  "examined_local_sources": [
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw6/Homework6.pdf",
+      "pages": 2,
+      "hits": [
+        {
+          "page": 1,
+          "text": "Homework 6\nDSCI 552, Instructor: Mohammad Reza Rajati\nDisclaimer: This set of homework applies SMOTE to a seriously imbalanced dataset\nwith a large number of features and data points. SMOTE is essentially a time consuming\nmethod. You need to start doing this homework early, so that you have enough time to run\nSMOTE on the full dataset.\n1. Tree-Based Methods\n(a) Download the APS Failure data from: https://archive.ics.uci.edu/ml/datasets/\nAPS+Failure+at+Scania+Trucks . The dataset contains a training set and a test\nset. The training set contains 60,000 rows, of which 1,000 belong to the positive\nclass and 171 columns, of which one is the class column. All attributes are nu-\nmeric.\n(b) Data Preparation\nThis data set has missing values. When the number of data with missing values\nis signi\ufb01cant, discarding them is not a good idea. 1\ni. Research what types of techniques are usually used for dealing with data with\nmissing values.2 Pick at least one of them and apply it to this data in the\nnext steps.3\nii. For each of the 170 features, calculate the coe\ufb03cient of variation CV =\ns\nm,\nwhere s is sample standard deviation and m is sample mean.\niii. Plot a correlation matrix for your features using pandas or any other tool.\niv. Pick \u230a\n\u221a\n170\u230bfeatures with highest CV , and make scatter plots and box plots\nfor them, similar to those on p. 129 of ISLR. Can you draw conclusions about\nsigni\ufb01cance of those features, just by the scatter plots? This does not mean\nthat you will only use those features in the following questions. We picked\nthem only for visualization.\nv. Determine the number of positive and negative data. Is this data set imbal-\nanced?\n(c) Train a random forest to classify the data set. Do NOT compensate for class\nimbalance in the data set.\nCalculate the confusion matrix, ROC, AUC, and\nmisclassi\ufb01cation for training and test sets and report them (You may use pROC\npackage). Calculate Out of Bag error estimate for your random forset and compare\nit to the test error.\n(d) Research how class imbalance is addressed in random forests. Compensate for\nclass imbalance in your random forest and repeat 1c. Compare the results with\nthose of 1c.\n(e) XGBoost and Model Trees\nIn the case of a univariate tree, only one input dimension is used at a tree split.\nIn a multivariate tree, or model tree, at a decision node all input dimensions can\n1In reality, when we have a model and we want to \ufb01ll in missing values, we do not have access to training\ndata, so we only use the statistics of test data to \ufb01ll in the missing values.\n2They are called data imputation techniques.\n3You are welcome to test more than one method.\n1\n"
+        },
+        {
+          "page": 2,
+          "text": "Homework 6\nDSCI 552, Instructor: Mohammad Reza Rajati\nbe used and thus it is more general. In univariate classi\ufb01cation trees, majority\npolling is used at each node to determine the split of that node as the decision\nrule. In model trees, a (linear) model that relies on all of the variables is used\nto determine the split of that node (i.e. instead of using Xj > s as the decision\nrule, one has P\nj \u03b2jXj > s. as the decision rule). Alternatively, in a regression\ntree, instead of using average in the region associated with each node, a linear\nregression model is used to determine the value associated with that node.\nOne of the methods that can be used at each node is Logistic Regression. Because\nthe number of variables is large in this problem, one can use L1-penalized logistic\nregression at each node. You can use XGBoost to \ufb01t the model tree. Determine\n\u03b1 (the regularization term) using cross-validation. Train the model for the APS\ndata set without compensation for class imbalance. Use one of 5 fold, 10 fold,\nand leave-one-out cross validation methods to estimate the error of your trained\nmodel and compare it with the test error. Report the Confusion Matrix, ROC,\nand AUC for training and test sets.\n(f) Use SMOTE (Synthetic Minority Over-sampling Technique) to pre-process your\ndata to compensate for class imbalance.4 Train XGBosst with L1-penalized lo-\ngistic regression at each node using the pre-processed data and repeat 1e. Do not\nforget that there is a right and a wrong way of cross validation here. Compare\nthe uncompensated case with SMOTE case.\n2. ISLR 6.6.3\n3. ISLR, 6.6.5\n4. ISLR 8.4.5\n5. ISLR 9.7.3\n6. Extra Practice: ISLR 5.4.2, 6.8.4, 8.4.4, 9.7.2\n4If you did not start doing this homework on time, downsample the common class to 6,000 so that you\nhave 12,000 data points after applying SMOTE. Remember that the purpose of this homework is to apply\nSMOTE to the whole training set, not the downsampled dataset.\n2\n"
+        }
+      ]
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/8:24/syllabusDSCI552new.pdf",
+      "pages": 14,
+      "hits": []
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/8:24/Lesson-1_introduction.pdf",
+      "pages": 103,
+      "hits": []
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw2/Homework2.pdf",
+      "pages": 2,
+      "hits": []
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw3/Homework3.pdf",
+      "pages": 4,
+      "hits": []
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw5/Homework5.pdf",
+      "pages": 2,
+      "hits": [
+        {
+          "page": 2,
+          "text": "Homework 5\nDSCI 552, Instructor: Mohammad Reza Rajati\n(j) In this section, we would like to \ufb01t a boosting tree to the data. As in classi\ufb01cation\ntrees, one can use any type of regression at each node to build a multivariate\nregression tree. Because the number of variables is large in this problem, one\ncan use L1-penalized regression at each node. Such a tree is called L1 penalized\ngradient boosting tree. You can use XGBoost5 to \ufb01t the model tree. Determine\n\u03b1 (the regularization term) using cross-validation.\n5Some hints on installing XGBoost on Windows: http://www.picnet.com.au/blogs/guido/2016/09/\n22/xgboost-windows-x64-binaries-for-download/.\n2\n"
+        }
+      ]
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw1/\u4f5c\u4e1a\u8981\u6c42\u548c\u539f\u6570\u636e/Homework1.pdf",
+      "pages": 2,
+      "hits": []
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw3/Homework4.pdf",
+      "pages": 4,
+      "hits": []
+    },
+    {
+      "path": "/Users/a0000/Desktop/mac/usc/2026fall/ds552/Midterm Exam 1-dsci552-Fall 2026.pdf",
+      "pages": 16,
+      "hits": []
+    }
+  ],
+  "local_faq_or_announcement_file_found": false,
+  "clarification_found": false,
+  "limit_scope": "Only the formal PDF page total counts; separately attached notebook/source pages are not added.",
+  "remaining_question": "Does the instructor intend standard gbtree with L1 leaf-weight regularization, or a genuine node/local logistic model tree?",
+  "external_course_portals_accessed": false,
+  "homework5_note": "Homework5(j) repeats L1 regression/model-tree terminology but supplies no node-level API or implementation clarification."
+}

@@ -5,6 +5,9 @@ import nbformat,pymupdf
 from code_report_content import ROOT,report_sections
 
 def verify_code_submission():
+    if (ROOT/'results/final_quick_execution.json').exists():
+        from validate_final_bounded import validate as validate_current
+        return validate_current()
     R=ROOT/'results';pdf=pymupdf.open(ROOT/'DSCI552_Homework6_Report.pdf')
     assert len(pdf)==20
     layout=json.loads((R/'report_layout.json').read_text())
@@ -54,22 +57,24 @@ def verify_code_submission():
                   'probability >= .5','0.6339676587','6.8.4','logistic model tree']:
         assert normalize(token) in normalized,token
     nb=nbformat.read(ROOT/'DSCI552_Homework6.ipynb',as_version=4)
-    old=nbformat.read(R/'archive_before_code_inclusive/DSCI552_Homework6.ipynb',as_version=4)
-    assert nb.cells[:len(old.cells)]==old.cells
-    cells=[c for c in nb.cells if c.cell_type=='code'];assert len(cells)==30
-    assert all(c.execution_count is not None for c in cells)
+    execution=json.loads((R/'standalone_notebook_execution.json').read_text())
+    standalone=json.loads((R/'standalone_validation.json').read_text())
+    assert nb.metadata.get('self_contained') and standalone['all_passed']
+    assert execution['clean_kernel'] and execution['mode']=='quick' and execution['errors']==0
+    cells=[c for c in nb.cells if c.cell_type=='code']
+    assert len(cells)==execution['code_cells']
+    assert [c.execution_count for c in cells]==list(range(1,len(cells)+1))
     assert not [o for c in cells for o in c.outputs if o.output_type=='error']
-    assert source in '\n'.join(c.source for c in cells)
-    manifest=json.loads((R/'code_inclusive_preservation.json').read_text())
+    manifest=json.loads((R/'standalone_preservation.json').read_text())
     for file,digest in manifest.items():assert hashlib.sha256((ROOT/file).read_bytes()).hexdigest()==digest,file
     assert len(list((R/'report_pages').glob('page_*.png')))==20
     result={'all_passed':True,'pdf_pages':20,'body_font_pt':10.4,'code_font_pt':8.7,
       'code_leading_pt':10.2,'core_code_lines_printed':printed,'code_pages':code_pages,
       'all_printed_code_and_output_lines_found_in_pdf':True,'code_compiles_and_indentation_preserved':True,
       'code_font_sizes_observed':sorted(font_sizes),'all_text_within_page':True,
-      'required_item_pages':required,'notebook_executed_code_cells':30,'notebook_errors':0,
-      'previous_notebook_cells_preserved_verbatim':True,'saved_experiment_files_unchanged':len(manifest),
-      'aps_models_retrained_this_revision':False,'core_equivalence_audit_passed':True,
+      'required_item_pages':required,'notebook_executed_code_cells':len(cells),'notebook_errors':0,
+      'notebook_self_contained_clean_kernel_verified':True,'saved_experiment_files_unchanged':len(manifest),
+      'aps_models_retrained_this_revision':False,'full_training_mode_executed':False,'core_equivalence_audit_passed':True,
       'format_audit':'No explicit local font/margin mandate found; chosen settings are documented.',
       'remaining_issue':'Original Q1(e-f) logistic model tree wording; standard gbtree interpretation explicitly distinguished.'}
     (R/'code_inclusive_validation.json').write_text(json.dumps(result,indent=2))

@@ -86,11 +86,12 @@
       20
     ]
   },
-  "notebook_executed_code_cells": 30,
+  "notebook_executed_code_cells": 28,
   "notebook_errors": 0,
-  "previous_notebook_cells_preserved_verbatim": true,
+  "notebook_self_contained_clean_kernel_verified": true,
   "saved_experiment_files_unchanged": 25,
   "aps_models_retrained_this_revision": false,
+  "full_training_mode_executed": false,
   "core_equivalence_audit_passed": true,
   "format_audit": "No explicit local font/margin mandate found; chosen settings are documented.",
   "remaining_issue": "Original Q1(e-f) logistic model tree wording; standard gbtree interpretation explicitly distinguished.",
@@ -117,11 +118,10 @@
       19,
       20
     ],
-    "all_final_pages_rendered": true,
-    "code_indentation_and_line_breaks_checked": true,
-    "formulas_and_chart_labels_checked": true,
+    "all_pages_rendered": true,
+    "formulas_code_indentation_labels_checked": true,
     "clipping_overlap_or_blank_pages_found": false,
-    "review_basis": "All five final contact sheets visually inspected after the final PDF rebuild; code/output lines also checked against selectable PDF text."
-  },
-  "final_pdf_sha256": "79f8d48840db8f2d2d02155c913ddb856feaedffa5b8e7237cebad96d38134fb"
+    "browser_print_preview_directly_checked": false,
+    "browser_limitation": "Browser URL security policy refused local file:// PDF; no workaround attempted."
+  }
 }

@@ -3,6 +3,7 @@ from pathlib import Path
 import json
 import pandas as pd
 from content import ROOT,j,p,h,eq,im,table,pages
+import content
 CORE=ROOT/'scripts/submission_core.py'
 
 def snippets():
@@ -20,72 +21,100 @@ def performance(d):
       [[s]+[f'{d[s][k]:.6f}' for k in ['error','auc','average_precision','precision','recall','f1']] for s in ['train','test']])
 
 def report_sections():
+    global R
+    selection=json.loads((ROOT/'results/final_run_selection.json').read_text())
+    R=ROOT/selection['report_results'];content.R=R
     old=pages();rf=j('rf_plain');rb=j('rf_balanced');xp=j('xgb_plain');xs=j('xgb_smote')
-    ep=j('extra_practice_results');cv=pd.read_csv(ROOT/'results/feature_cv.csv',index_col=0)
+    ep=j('extra_practice_results');cv=pd.read_csv(R/'feature_cv.csv',index_col=0)
     top=j('top13');env=j('environment');sections=[]
+    oa=j('oob_coverage');sup=j('rf_balanced_subsample')
     topout=[]
     for i in range(0,13,4):topout.append(' | '.join(f'{f}: {cv.loc[f,"cv"]:.4f}' for f in top[i:i+4]))
     sections.append(('1(a)-(b)(ii). Data, imputation and feature statistics',[
-      p('DSCI 552 Homework 6. Core Python code, English answers and actual outputs for Q1-6 are included. Original full-data models and 70 CV fits are reused; this revision does not repeat APS training. Common imports/functions are defined once. Seed = 552.'),
+      p('DSCI 552 Homework 6: code, answers and actual full-run results for Q1-6. Common functions are defined once; seed 552.'),
       code('imports','preparation'),
       table(['Official split','Shape','neg / pos','Missing cells'],[['Training','60000 x 170','59000 / 1000','850015'],['Test','16000 x 170','15625 / 375','228680']]),
       p('Both headers are on line 21 after 20 preamble lines; na denotes missingness. The 170 predictors are numeric float64, identically ordered, and exclude class. Median imputation retains rows and resists extreme counters; methods and the footnote convention are explained on page 5.'),
       p('All 170 CVs use median-imputed training rows and sample SD (ddof=1). Zero means give undefined CVs and are excluded from ranking; all-missing columns are retained with zero fallback and flagged. Neither occurs here. Main A/B imputation is separate; Bt is train-only sensitivity. CV fits preprocessing only on its training fold.'),
       output('Top 13 CV features (visualization only):\n'+'\n'.join(topout)),
-      p('CV = sample SD / mean; near-zero means and rare extreme values inflate CV. All later models use every one of the 170 predictors.')]))
+      p('CV = sample SD / mean. All 170 predictors enter modeling; the seeded sample below is for page 3 only.'),code('scatter')]))
     sections.append(('1(b)(iii). Correlation and shared scatter-matrix code',[
       code('correlation'),im('correlation_overview',430),
-      p('Pearson correlation uses all 60,000 median-imputed training rows. The report image uses 1-based original feature indices; code indices are zero-based. Exact names, all 170 labels and numerical entries are retained with the notebook. Related counters form strongly correlated blocks. Correlation is marginal and linear, does not establish causation, and can be changed by imputation.'),
-      h('Complete 13-feature scatter matrix: helper used with page 3 data'),code('full_scatter')]))
+      p('All 60,000 imputed training rows and all 170 features enter Pearson correlation. Plot indices are 1-based; code indices are zero-based. Correlation is marginal/linear, does not establish causation and can change after imputation. Related counters form correlated blocks.'),
+      code('full_scatter')]))
     sections.append(('1(b)(iv). Scatter plots: the 13 highest-CV features',[
-      code('scatter'),im('scatter_report',414),
-      p('The reference is cf_000; all other 12 selected features appear above. Blue = neg; red = pos. The plot uses all 1,000 positives plus 2,500 randomly sampled negatives, seed 552. This deliberate display sample does not represent prevalence. log(1+x) is used only for visualization, never model fitting.'),
-      p('The full matrix contains every pair and class-conditional diagonal histograms; the helper on page 2 takes Z, ys, top and colors. Scatter plots alone cannot establish statistical significance: overplotting, marginal versus conditional effects, and multiple comparisons prevent an inferential conclusion. High CV is not predictive importance.')]))
+      code('scatter_call'),im('scatter_report',510),
+      p('The lower triangle directly displays all 78 unordered pairs of the 13 selected features, with each pair appearing once. Blue = neg; red = pos. The plot uses all 1,000 positives plus 2,500 randomly sampled negatives, seed 552. This deliberate display sample does not represent prevalence. log(1+x) is used only for visualization, never model fitting.'),
+      p('Each panel uses its own log1p data range; numerical ticks are suppressed to keep feature names clear. The notebook also retains the full high-resolution matrix with ticks and diagonal histograms. Scatter plots alone cannot establish statistical significance: overplotting, marginal versus conditional effects, and multiple comparisons prevent an inferential conclusion. High CV is not predictive importance.')]))
     sections.append(('1(b)(iv)-(v). Box plots and imbalance',[
       code('boxes'),im('boxplots13',438),
       p('Boxes use all original training rows, separated by class, after training-median imputation and log(1+x) for display. Outlier symbols are hidden; no rows are removed. Several rare-count features have quartiles at zero, so boxes collapse.'),
       p('Training: 59,000 neg and 1,000 pos (59:1; 1.667% positive). Official test: 15,625 neg and 375 pos (2.344% positive). Both are severely imbalanced. Always-negative prediction has error 1.667%/2.344% but zero positive recall. The 13 plotted predictors do not restrict modeling: all 170 are retained.')]))
     sections.append(('1(c)-(d). Common evaluation and forest training code',[
-      code('evaluation','forest','roc_confusion'),
-      p('Common missing-data methods are deletion, constant/mean/median/mode, nearest neighbors, iterative models and multiple imputation [2]. Median filling is fast and robust to extreme counters, but can distort dependencies and does not model missingness. The homework footnote main result uses separate medians for each split, without pooling or labels. This differs from the deployment train-fitted imputer; Bt implements that sensitivity. CV always fits on tr only. The baseline has no class weighting or resampling beyond ordinary bootstrap sampling. The second forest uses balanced weights n/(2 n_k): approximately 0.5085 for neg and 30 for pos, a 59:1 ratio. Cost-sensitive weighting and sampling are established approaches to imbalanced forests [3,4]. Other parameters match.'),
-      p('Hard predictions use positive probability >= 0.5, including ties. ROC-AUC uses probabilities; AP is average_precision_score, not trapezoidal PR-AUC. Confusion matrices use true rows/predicted columns in [neg, pos] order. Positive precision, recall and F1 supplement error and AUC. OOB aggregates only trees that excluded the row. RUN_TRAINING=False preserves earlier fitted models; these training calls were not re-executed for this report revision.')]))
+      code('evaluation','oob_audit','forest','roc_confusion','forest_supplement'),
+      p('Imputation methods include deletion, constant/mean/median/mode, nearest neighbors, iterative models and multiple imputation [2]. Median filling resists extremes but distorts dependencies. Separate split medians follow the footnote; Bt is train-only sensitivity, and CV fits only tr. The plain forest has no class weighting. In sklearn 1.9.1, balanced weights n/(2 n_k)=0.5085/30 drive bootstrap sampling; balanced_subsample weights within uniformly drawn trees. Both are established imbalance strategies [3,4]; other parameters match.'),
+      p('Predictions use P(pos)>=0.5, including ties. ROC-AUC uses probabilities; AP is average_precision_score. CM rows are true and columns predicted [neg,pos]. OOB averages only trees excluding that row; both-class coverage must be checked. RUN_TRAINING=False disables only PDF-layout fitting; the original full run and separate supplemental fit were actually executed.')]))
     forestrows=[]
     for name,d in [('Plain',rf),('Balanced',rb)]:
       for split in ['train','test']:forestrows.append([name+' / '+split]+[f'{d[split][k]:.6f}' for k in ['error','auc','average_precision','precision','recall','f1']])
     sections.append(('1(c)-(d). Forest outputs and OOB comparison',[
       table(['Model / split','Error','ROC-AUC','AP','Precision','Recall','F1'],forestrows),im('rf_plain_evaluation',520),im('rf_balanced_evaluation',520),
-      table(['Forest','OOB error','Test error','Test - OOB','Fit/eval seconds'],[[name,f'{d["oob_error"]:.6f}',f'{d["test"]["error"]:.6f}',f'{d["test"]["error"]-d["oob_error"]:.6f}',f'{d["fit_and_evaluate_seconds"]:.1f}'] for name,d in [('Plain',rf),('Balanced',rb)]]),
-      p('Global training imputation makes OOB an approximate internal estimate rather than fully cross-fitted preprocessing. Test prevalence differs. Weighting raises recall from 0.7227 to 0.7413 but lowers precision from 0.9313 to 0.8373, increasing overall error. Low error can conceal missed positives because negatives dominate. Deep-forest training scores are optimistic resubstitution results.')]))
-    sections.append(('1(e)-(f). XGBoost interpretation and fold-local Pipeline',[
-      p('Installed XGBoost '+env['versions']['xgboost']+' and its matching API/documentation were inspected [5,6]. The question describes node-level L1 logistic model trees. Standard gbtree instead uses feature-threshold splits and scalar leaf scores; binary:logistic supplies logistic loss/link, and reg_alpha penalizes leaf weights. It does not fit logistic regression at each node. gblinear is a global linear booster, not a tree. No course clarification of this wording was found. This submission uses the runnable gbtree interpretation and explicitly does not claim a genuine logistic model tree.'),
+      table(['Forest','Historical all-row','Valid OOB error','Valid n','Full-class OOB?'],
+        [[label,f'{d["oob_error"]:.8f}',f'{oa[name]["valid_error"]:.8f}',str(oa[name]['valid_denominator']),
+          'Yes' if oa[name]['full_class_coverage'] else 'NO: negative-only']
+         for name,label,d in [('rf_plain','Plain',rf),('rf_balanced','Balanced',rb)]]),
+      p(f'Plain: {oa["rf_plain"]["valid_errors"]}/60000 OOB errors; test error {rf["test"]["error"]:.8f}, gap {rf["test"]["error"]-oa["rf_plain"]["valid_error"]:+.8f}. Balanced: all 1000 positives lack OOB votes and have [0,0] probabilities. The historical 1199/60000 counts them all as negatives/errors. Its valid-row value is {oa["rf_balanced"]["valid_errors"]}/59000, NEGATIVE-ONLY; it cannot estimate overall error or be compared with full test error {rb["test"]["error"]:.8f}. Neither model has NaN or other invalid covered rows. Coverage/details and a separate valid supplement follow on pages 7-8.'),
+      p('Existing train/test scores above remain unchanged. Weighting slightly increases minority recall but lowers precision and increases overall error. Global training imputation makes otherwise valid OOB an approximate internal estimate; training scores are optimistic resubstitution results.')]))
+    sections.append(('1(e)-(f). Pipeline; coverage-aware RF OOB review',[
+      p('XGBoost '+env['versions']['xgboost']+' gbtree uses feature-threshold splits and scalar leaf weights. binary:logistic is the logistic objective/link; reg_alpha penalizes leaf weights, not node-level logistic-regression coefficients [5,6]. gblinear is a global linear booster, not a model tree. Local course material gives no clarifying API mapping. The runnable standard-XGBoost interpretation is retained; a genuine logistic model tree remains an instructor question.'),
       eq(r'P(Y=1\mid x)=\sigma(\sum_t f_t(x)),\quad\Omega(f_t)=\gamma L_t+\frac{\lambda}{2}\sum_\ell w_{t\ell}^2+\alpha\sum_\ell |w_{t\ell}|'),
       code('xgb_pipeline'),
-      p('The baseline Pipeline has no imbalance compensation. Both procedures share scaling and all estimator settings; scaling is unnecessary for trees but makes the SMOTE comparison consistent. Standardization reduces dominance of large-unit counters in Euclidean neighbor selection. It cannot remove skew, imputation artifacts or high-dimensional distance problems.'),
-      p('Inside each fold, Pipeline.fit fits the imputer and scaler on tr only, resamples tr only when enabled, and fits the estimator. predict_proba transforms va without resampling. No official-test rows or labels enter tuning. Rounds (250), threshold (0.5) and all non-alpha settings are fixed in advance; no early stopping or nested parallel CV is used.')]))
-    ca=pd.read_csv(ROOT/'results/xgb_plain_cv_summary.csv');cb=pd.read_csv(ROOT/'results/xgb_smote_cv_summary.csv')
+      p('The baseline has no imbalance compensation. Shared standardization makes SMOTE distances less dominated by large-unit counters; it cannot remove skew or high-dimensional distance limitations.'),
+      p('Pipeline.fit fits preprocessing and SMOTE only on tr; predict_proba transforms va without resampling. Test data never enter tuning. Rounds250/threshold0.5 and other settings are fixed; no early stopping or nested parallel CV.'),
+      h('RF OOB coverage audit and supplemental method'),
+      table(['Forest / class','Zero votes','Valid / n','Coverage','Vote range / mean'],
+        [[label+' / '+cls,str(oa[name]['by_class'][cls]['zero_votes']),
+          f"{oa[name]['by_class'][cls]['valid']} / {oa[name]['by_class'][cls]['n']}",
+          f"{oa[name]['by_class'][cls]['valid_fraction']:.1%}",
+          f"{oa[name]['by_class'][cls]['min_votes']}-{oa[name]['by_class'][cls]['max_votes']} / {oa[name]['by_class'][cls]['mean_votes']:.2f}"]
+         for name,label in [('rf_plain','Plain'),('rf_balanced','Balanced'),('rf_balanced_subsample','Supplement')]
+         for cls in ['neg','pos']]),
+      p('Actual estimators_samples_ indices were counted for every tree and all stored OOB probabilities independently reconstructed from tree predictions. Overall valid coverage: plain 60000/60000; balanced 59000/60000 (98.3333%); supplement 60000/60000. In sklearn 1.9.1, balanced sampling gives each positive probability 1/2000 per draw: 30 expected draws/tree and near-zero exclusion probability. The generic too-few-trees warning comes from balanced, not plain. Dropping missing positives does not solve the coverage problem.'),
+      performance(sup),
+      p(f'The separate balanced_subsample forest preserves all other settings, uses uniform bootstraps plus per-tree balanced impurity weights, and covers both classes. OOB={sup["oob"]["valid_errors"]}/60000={sup["oob"]["valid_error"]:.8f}; test error={sup["test"]["error"]:.8f}; gap={sup["test"]["error"]-sup["oob"]["valid_error"]:+.8f}. It is not a replacement or test-selected improvement. Confusion matrices and ROC follow on page 8.')]))
+    ca=pd.read_csv(R/'xgb_plain_cv_summary.csv');cb=pd.read_csv(R/'xgb_smote_cv_summary.csv')
     searchrows=[[f'{a.alpha:g}',f'{a.mean_ap:.6f}',f'{a.mean_error:.6f}',f'{b.mean_ap:.6f}',f'{b.mean_error:.6f}'] for a,b in zip(ca.itertuples(),cb.itertuples())]
-    sections.append(('1(e)-(f). Alpha search: code and actual five-fold outputs',[
+    sections.append(('1(e)-(f). CV outputs; supplemental forest evaluation',[
       code('search'),table(['Alpha','Plain mean AP','Plain CV error','SMOTE mean AP','SMOTE CV error'],searchrows),
-      p('Stratified shuffled 5-fold CV uses all 60,000 training rows: 48,000 fitting and 12,000 validation rows per fold (200 validation positives). Maximize mean validation AP to emphasize rare-positive ranking; exact ties choose smaller alpha. Both searches use identical fold membership. Misclassification uses the fixed 0.5 rule; the official test set chooses nothing.'),
-      p(f'Selected alpha: plain {xp["selected_alpha"]:g}, SMOTE {xs["selected_alpha"]:g}. Plain selected CV error {xp["cv"]["mean_error"]:.6f} (fold SD {xp["cv"]["sd_error"]:.6f}); SMOTE {xs["cv"]["mean_error"]:.6f} (SD {xs["cv"]["sd_error"]:.6f}). The 35 fits took {pd.read_csv(ROOT/"results/xgb_plain_cv_folds.csv").seconds.sum():.1f}s and {pd.read_csv(ROOT/"results/xgb_smote_cv_folds.csv").seconds.sum():.1f}s respectively. Alpha 0 is the observed plain-search optimum, not an omitted search. Fold SD is not a confidence interval; selected CV performance is a tuning estimate rather than unbiased nested validation.')]))
+      p('Both searches use all training rows, identical stratified five-fold splits and fold-local preprocessing. Select mean AP; smaller-alpha ties. No test-based selection.'),
+      p(f'Selected plain alpha={xp["selected_alpha"]:g} (no L1 penalty), SMOTE alpha={xs["selected_alpha"]:g}. Earlier full-run CV times: {pd.read_csv(R/"xgb_plain_cv_folds.csv").seconds.sum():.1f}/{pd.read_csv(R/"xgb_smote_cv_folds.csv").seconds.sum():.1f}s. Selected CV scores are tuning estimates, not unbiased nested validation.'),
+      h('Separate balanced_subsample forest: actual outputs'),
+      im('rf_balanced_subsample_evaluation',520)]))
+    pos=j('xgb_positive')
     sections.append(('1(e). Full training and uncompensated XGBoost results',[
       code('final_fit'),performance(xp),im('xgb_plain_evaluation',510),
-      p(f'Selected alpha = {xp["selected_alpha"]:g}. No compensation is applied. Test error {xp["test"]["error"]:.6f} minus CV error {xp["cv"]["mean_error"]:.6f} is {xp["test"]["error"]-xp["cv"]["mean_error"]:.6f}. CV fits use 80% of training rows and train-only fold preprocessing; final fitting uses all rows and main testing follows the footnote. Prevalence/distribution differences also affect the gap. Final fit/evaluation took {xp["final_fit_and_evaluate_seconds"]:.2f}s in the saved original run. Training evaluation always uses original As, not synthetic data.')]))
+      p(f'No compensation; alpha={xp["selected_alpha"]:g}. Test minus CV error = {xp["test"]["error"]-xp["cv"]["mean_error"]:+.6f}. CV uses 80% fitting rows and fold-local preprocessing; the final fit uses all rows and the test-imputation footnote. Current full-run final fit/evaluation: {xp["final_fit_and_evaluate_seconds"]:.2f}s. Training scores use original rows.'),
+      h('Supplementary comparison restricted to alpha > 0'),code('positive_alpha'),
+      table(['Split','alpha','CV error','Error','ROC-AUC','CM: [[TN,FP],[FN,TP]]'],
+        [[split,f'{pos["selected_alpha"]:g}',f'{pos["cv"]["mean_error"]:.6f}',
+          f'{pos[split]["error"]:.6f}',f'{pos[split]["auc"]:.6f}',
+          str(pos[split]['confusion_matrix'])] for split in ['train','test']]),
+      p(f'Restrict the same CV AP table to alpha > 0; the same smaller-alpha tie rule selects {pos["selected_alpha"]:g} (CV AP {pos["cv"]["mean_ap"]:.6f}). A separate all-60,000-row, no-SMOTE model was actually fitted with every other setting fixed. Test error difference versus alpha={xp["selected_alpha"]:g}: {pos["test"]["error"]-xp["test"]["error"]:+.6f}; AUC difference: {pos["test"]["auc"]-xp["test"]["auc"]:+.6f}. It does not replace the unrestricted optimum or resolve the node-level model-tree ambiguity.')]))
     sections.append(('1(f). Full-data SMOTE + XGBoost results',[
       code('smote_call'),
       eq(r'x_{new}=x_i+u(x_{neighbor}-x_i),\qquad u\sim U(0,1)'),
       table(['Stage','neg','Original pos','Final pos','Total'],[['Each fold fit','47200','800','47200','94400'],['Full final fit','59000','1000','59000','118000'],['Validation (unchanged)','11800','200','200','12000'],['Test (unchanged)','15625','375','375','16000']]),
       performance(xs),im('xgb_smote_evaluation',510),
-      p(f'SMOTE [7] uses five minority neighbors, seed 552, sampling_strategy=1.0, after fold-local imputation and standardization. There is no majority downsampling. Final full-data resampling took {xs["resampling_seconds"]:.3f}s; final scaling, resampling, fit/evaluation took {xs["final_fit_and_evaluate_seconds"]:.2f}s. The original full-data and fold fits were actually executed, not repeated in this revision. Original training/test distributions are used for all displayed evaluations.'),
-      p(f'Alpha = {xs["selected_alpha"]:g}; test error {xs["test"]["error"]:.6f} minus selected CV error {xs["cv"]["mean_error"]:.6f} = {xs["test"]["error"]-xs["cv"]["mean_error"]:.6f}. Compared with plain XGB, recall rises from 0.7627 to 0.8933, but precision falls from 0.9565 to 0.6080: FP rises 13 to 216 while FN falls 89 to 40. Oversampling changes the fitted prior, so scores need not be calibrated population probabilities. The threshold was not optimized on the test set. Resampling before splitting would leak neighbor information [8].')]))
+      p(f'SMOTE [7] uses five minority neighbors, seed 552, sampling_strategy=1.0, after fold-local imputation and standardization. There is no majority downsampling. Final full-data resampling took {xs["resampling_seconds"]:.3f}s; final scaling, resampling, fit/evaluation took {xs["final_fit_and_evaluate_seconds"]:.2f}s. All full-data and fold fits were executed anew in the isolated full run. Original training/test distributions are used for all displayed evaluations.'),
+      p(f'Alpha = {xs["selected_alpha"]:g}; test error {xs["test"]["error"]:.6f} minus selected CV error {xs["cv"]["mean_error"]:.6f} = {xs["test"]["error"]-xs["cv"]["mean_error"]:.6f}. Compared with plain XGB, recall changes {xp["test"]["recall"]:.4f} to {xs["test"]["recall"]:.4f}, precision {xp["test"]["precision"]:.4f} to {xs["test"]["precision"]:.4f}; FP {xp["test"]["confusion_matrix"][0][1]} to {xs["test"]["confusion_matrix"][0][1]}, FN {xp["test"]["confusion_matrix"][1][0]} to {xs["test"]["confusion_matrix"][1][0]}. Oversampling changes the fitted prior, so scores need not be calibrated population probabilities. The threshold was not optimized on the test set. Resampling before splitting would leak neighbor information [8].')]))
     names=[('rf_plain','RF plain'),('rf_balanced','RF balanced'),('xgb_plain','XGB plain'),('xgb_smote','XGB SMOTE')]
     rows=[[label]+[f'{j(n)["test"][k]:.5f}' for k in ['error','auc','average_precision','precision','recall','f1']] for n,label in names]
     sens=[[label,f'{j(n)["test"]["error"]:.6f}',f'{j(n)["test_train_only_imputation"]["error"]:.6f}',f'{j(n)["test"]["average_precision"]:.5f}',f'{j(n)["test_train_only_imputation"]["average_precision"]:.5f}'] for n,label in names]
     sections.append(('1(c)-(f). Unified comparison and imputation sensitivity',[
       code('comparison'),table(['Model / test','Error','ROC-AUC','AP','Precision','Recall','F1'],rows),im('model_comparison',478),
       table(['Model','Main error','Train-only error','Main AP','Train-only AP'],sens),
-      p('Sensitivity holds every model and scaler fixed, replacing only test-median B with train-median Bt. No result in this table selects a model or threshold. SMOTE error falls from 1.600% to 1.075%; FP falls 216 to 125 while FN rises 40 to 47. This material change shows how synthetic-neighbor fits can amplify shifts in imputed values.'),
-      p('ROC-AUC measures ranking across both classes; AP summarizes precision along minority recall and depends on prevalence. The dashed PR baseline is test prevalence 0.02344. The data description [9] gives cost 10 FP + 500 FN. Retrospective test costs are RF plain 52,200; RF balanced 49,040; XGB plain 44,630; XGB SMOTE 22,160. Costs did not guide tuning.')]))
+      p(f'Sensitivity holds every model and scaler fixed, replacing only test-median B with train-median Bt. No result in this table selects a model or threshold. SMOTE main versus train-only error: {xs["test"]["error"]:.6f} versus {xs["test_train_only_imputation"]["error"]:.6f}; FP {xs["test"]["confusion_matrix"][0][1]} versus {xs["test_train_only_imputation"]["confusion_matrix"][0][1]}, FN {xs["test"]["confusion_matrix"][1][0]} versus {xs["test_train_only_imputation"]["confusion_matrix"][1][0]}. This material change shows how synthetic-neighbor fits can amplify shifts in imputed values.'),
+      p(f'ROC-AUC measures ranking across both classes; AP summarizes precision along minority recall and depends on prevalence. The dashed PR baseline is test prevalence 0.02344. The data description [9] gives cost 10 FP + 500 FN. Retrospective test costs (RF plain/balanced, XGB plain/SMOTE): {10*rf["test"]["confusion_matrix"][0][1]+500*rf["test"]["confusion_matrix"][1][0]}, {10*rb["test"]["confusion_matrix"][0][1]+500*rb["test"]["confusion_matrix"][1][0]}, {10*xp["test"]["confusion_matrix"][0][1]+500*xp["test"]["confusion_matrix"][1][0]}, {10*xs["test"]["confusion_matrix"][0][1]+500*xs["test"]["confusion_matrix"][1][0]}. Costs did not guide tuning.')]))
     sections.append(('Q2 and Q6 ridge: all regularization subparts',[
       p('Q2: ISLR 2nd ed. 6.6.3 (a)-(e), p.284; same content as 1st ed. 6.8.3. Q6 Extra Practice: exact assignment reference ISLR 1st ed. 6.8.4 (a)-(e), pp.260-261; its 2nd-edition equivalent is 6.6.4 (not 6.8.4), pp.284-285. These are distinct lasso-radius and ridge-penalty questions. Intercepts are unpenalized.'),
       eq(r'Q2:\ \min R(\beta)\ \mathrm{s.t.}\ \sum_j|\beta_j|\leq s;\qquad Q6:\ \min R(\beta)+\lambda\sum_j\beta_j^2'),
@@ -131,9 +160,9 @@ def report_sections():
     sections.append(('References, execution provenance and submission scope',[
       *refs[:9],
       h('Execution and format'),
-      p('Python '+env['python']+'; '+', '.join(f'{k} {v}' for k,v in env['versions'].items())+'. CPU only; seed 552; estimator threads 4 and sequential folds. Saved full-data fits, probability outputs and fold search files supply every numeric model table. No APS training was repeated for this revision. Refactored constructors, folds, preprocessing arrays and metrics are independently checked against those artifacts.'),
-      p('The displayed code is real Python from submission_core.py; it includes data loading/imputation, all feature statistics, plots, common evaluation, both forests, fold-local SMOTE/Pipeline, alpha search/selection, final XGBoost fits and all computational exercises. RUN_TRAINING=False prevents retraining while retaining the original training logic. Optional code for environment discovery, caching, serialization, report layout and repeated validation remains in the project.'),
-      p('Homework6.pdf, the local August 24, 2026 syllabus and course introduction were checked. No explicit font-size or margin rule was found there. Body 10.4 pt, monospaced code 8.7 pt and 36-pt side margins are layout choices, not claimed course mandates. All code, answers, necessary output, figures and references count in this PDF. The corrected 20-page scope follows the user-provided course submission requirement.'),
+      p('Python '+env['python']+'; '+', '.join(f'{k} {v}' for k,v in env['versions'].items())+'. CPU only; seed 552; estimator threads 4 and sequential folds. Saved full-data fits, probability outputs and fold search files supply every numeric model table. The isolated full run fitted 2 forests, 70 CV estimators, 2 selected final XGB models and 1 positive-alpha supplement using only raw CSVs and the inline notebook. The self-contained notebook has full-from-raw and fingerprint-validated quick modes. A clean-kernel quick run reproduced all five original final-model train/test/sensitivity predictions and recomputed metrics; saved CV summaries/selection were checked without refitting CV estimators. The earlier full snapshot executed 75 fits. OOB review subsequently identified invalid balanced OOB coverage, retained the old arithmetic, and fitted only a separate balanced_subsample forest. The revised notebook was executed in quick mode with independent original-model and OOB-audit fingerprints. Historical models, XGB/SMOTE and all 70 CV results remain unchanged.'),
+      p('The displayed code is real Python from submission_core.py; it includes data loading/imputation, all feature statistics, plots, common evaluation, both forests, fold-local SMOTE/Pipeline, alpha search/selection, final XGBoost fits and all computational exercises. RUN_TRAINING=False disables fitting only during PDF layout; the displayed fitting logic is exercised by full notebook execution. Optional code for environment discovery, caching, serialization, report layout and repeated validation remains in the project.'),
+      p('Homework6.pdf, the local August 24, 2026 syllabus and course introduction were checked. No explicit font-size or margin rule was found there. Body 10.4 pt, monospaced code 8.7 pt and 36-pt side margins are layout choices, not claimed course mandates. All content in the formal PDF counts toward its 20-page limit. Separately attached notebook/source pages are not added, and the notice does not require printing the entire project. Necessary implementation and results remain here; supporting code stays in the notebook/project.'),
       p('Edition cross-check: Q2/Q3 use second-edition 6.6.3/6.6.5; Q4/Q5 and Q6 5.4.2/8.4.4/9.7.2 agree across checked editions. Q6 6.8.4 explicitly uses the first-edition ridge exercise, equivalent to second-edition 6.6.4. Full source-page evidence is retained. The remaining instructor interpretation issue concerns node-level logistic model trees versus standard XGBoost, accurately distinguished on page 7.')]))
     assert len(sections)==20
     return sections

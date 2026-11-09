@@ -1,12 +1,10 @@
 """Real, compact core implementation printed in the PDF.
-RUN_TRAINING stays False during report revision. Existing APS fits are reused.
+RUN_TRAINING stays False during PDF layout. A separate full notebook run fits all models.
 The training branches implement the original experiment, without cache/I/O code.
 """
 # %% imports
 from pathlib import Path
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
@@ -16,7 +14,7 @@ from imblearn.pipeline import Pipeline
 from imblearn.over_sampling import SMOTE
 from xgboost import XGBClassifier
 SEED = 552
-RUN_TRAINING = False  # Original APS fits are not rerun in this revision.
+RUN_TRAINING = False  # Layout only; full notebook execution performs every fit.
 # %% preparation
 def read_aps(split):
     path = Path('Homework 6 Data') / f'aps_failure_{split}_set.csv'
@@ -45,18 +43,25 @@ ax.set(xticks=np.arange(0, 170, 10), yticks=np.arange(0, 170, 10))
 fig.colorbar(im, ax=ax, label='Pearson correlation')
 # %% full_scatter
 def full_scatter(Z, ys, columns, colors):
-    fig, axes = plt.subplots(13, 13, figsize=(22, 22))
-    for i, a in enumerate(columns):
-        for j, b in enumerate(columns):
-            ax = axes[i, j]
-            if i == j:
-                for c, color in [(0, '#3378a6'), (1, '#d34c49')]:
-                    ax.hist(Z[a].to_numpy()[ys == c], bins=20,
-                            histtype='step', density=True, color=color)
-            else:
-                ax.scatter(Z[b], Z[a], c=colors, s=1.5, alpha=.25)
-            if j == 0: ax.set_ylabel(a, fontsize=8)
-            if i == 12: ax.set_xlabel(b, fontsize=8)
+    fig, axes = plt.subplots(12, 12, figsize=(7.4, 7.4))
+    pairs = []
+    for i in range(1, 13):
+        for j in range(12):
+            ax = axes[i-1, j]
+            if j >= i:
+                ax.axis('off'); continue
+            ax.scatter(Z[columns[j]], Z[columns[i]], c=colors, s=.35, alpha=.22)
+            ax.set_xticks([]); ax.set_yticks([])
+            if i == 12: ax.set_xlabel(columns[j], rotation=90, fontsize=9)
+            if j == 0: ax.set_ylabel(columns[i], rotation=0, ha='right', fontsize=9)
+            pairs.append((columns[j], columns[i]))
+    from matplotlib.lines import Line2D
+    handles = [Line2D([0], [0], marker='o', ls='', color=c, label=l)
+               for c, l in [('#3378a6', 'neg'), ('#d34c49', 'pos')]]
+    fig.legend(handles=handles, loc='upper center', ncol=2, frameon=False)
+    assert len(set(pairs)) == 78
+    fig.subplots_adjust(left=.15, right=.99, bottom=.12, top=.95,
+                        wspace=.08, hspace=.08)
     return fig
 # %% scatter
 rng = np.random.default_rng(SEED)
@@ -65,12 +70,9 @@ idx = np.r_[rng.choice(np.flatnonzero(y == 0), 2500, replace=False),
 Z = np.log1p(D.iloc[idx][top])
 ys = y[idx]
 colors = np.where(ys == 1, '#d34c49', '#3378a6')
-# Full matrix: full_scatter(Z, ys, top, colors).
-fig, axes = plt.subplots(4, 3, figsize=(9, 10))
-for ax, col in zip(axes.flat, top[1:]):
-    ax.scatter(Z[top[0]], Z[col], c=colors, s=3, alpha=.3)
-    ax.set(xlabel=f'log(1+{top[0]})', ylabel=f'log(1+{col})')
-fig.tight_layout()
+# %% scatter_call
+fig = full_scatter(Z, ys, top, colors)
+# The report plots only j < i: 13*12/2 = 78 unordered pairs.
 # %% boxes
 fig, axes = plt.subplots(5, 3, figsize=(10, 10))
 for ax, col in zip(axes.flat, top):
@@ -94,6 +96,15 @@ def evaluate_splits(model, train, test, test_train_only):
             'test': evaluate(yt, model.predict_proba(test)[:, 1]),
             'train_only_test': evaluate(yt,
                 model.predict_proba(test_train_only)[:, 1])}
+# %% oob_audit
+def covered_oob(model, labels):
+    votes = np.zeros(len(labels), dtype=int)
+    for bag in model.estimators_samples_:
+        votes += np.bincount(bag, minlength=len(labels)) == 0
+    p = model.oob_decision_function_
+    valid = (votes > 0) & np.isfinite(p).all(1) & np.isclose(p.sum(1), 1)
+    error = np.mean((p[valid, 1] >= .5) != labels[valid])
+    return votes, valid, error  # Check coverage of EACH class before comparison.
 # %% forest
 def train_forests():
     fitted, scores = {}, {}
@@ -105,7 +116,8 @@ def train_forests():
         model.fit(A, y)
         scores[name] = evaluate_splits(model, A, B, Bt)
         oob = model.oob_decision_function_[:, 1]
-        scores[name]['oob_error'] = float(np.mean((oob >= .5) != y))
+        scores[name]['historical_unmasked_oob'] = np.mean((oob >= .5) != y)
+        scores[name]['oob_votes_mask_error'] = covered_oob(model, y)
         fitted[name] = model
     return fitted, scores
 if RUN_TRAINING:
@@ -116,6 +128,12 @@ def draw_evaluation(labels, probability, cm_axis, roc_axis):
     M.ConfusionMatrixDisplay(cm, display_labels=['neg', 'pos']).plot(ax=cm_axis)
     fpr, tpr, _ = M.roc_curve(labels, probability)
     roc_axis.plot(fpr, tpr)
+# %% forest_supplement
+if RUN_TRAINING:
+    supplement = RandomForestClassifier(**forests['rf_plain'].get_params())
+    supplement.set_params(class_weight='balanced_subsample').fit(A, y)
+    supplement_scores = evaluate_splits(supplement, A, B, Bt)
+    supplement_oob = covered_oob(supplement, y)
 # %% xgb_pipeline
 ALPHAS = [0., .001, .01, .1, 1., 10., 100.]
 def make_xgb(alpha):
@@ -180,6 +198,13 @@ if RUN_TRAINING:
 if RUN_TRAINING:
     smote_final = train_final(alpha1, True)
     print(smote_final[3])  # Final class counts: [59000, 59000].
+# %% positive_alpha
+def positive_alpha(summary):
+    positive = summary.loc[summary.alpha > 0]
+    return float(positive.sort_values(['mean_ap', 'alpha'],
+                                     ascending=[False, True]).iloc[0].alpha)
+if RUN_TRAINING:
+    positive_final = train_final(positive_alpha(plain_summary), False)
 # %% comparison
 def pr_curves(predictions):
     fig, ax = plt.subplots(figsize=(6, 4))

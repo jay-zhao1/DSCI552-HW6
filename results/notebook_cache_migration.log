@@ -1,0 +1,3 @@
+Mode: quick | Output: results/notebook_runs/quick_20261107T080704_309889Z
+Quick verifies cached final models; full fits 2 forests + 70 CV estimators + 2 final XGBs.
+Created validated cache: 17 artifacts; APS fit methods were forbidden.

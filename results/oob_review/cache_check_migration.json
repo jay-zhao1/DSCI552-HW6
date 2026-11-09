@@ -1,0 +1,9 @@
+{
+  "all_passed": true,
+  "source_change_verified_exactly_one_postfit_assertion": true,
+  "all_fits_forbidden_during_revalidation": true,
+  "all_artifact_hashes_identical": true,
+  "original_sidecar_preserved": true,
+  "parent_manifest_sha256": "79bf0c5c9db04600483ca0308ab2bacb6c184fd123673ccfb10e5ccb2bd6732a",
+  "parameters_all_predictions_and_actual_bootstrap_oob_recomputed": true
+}

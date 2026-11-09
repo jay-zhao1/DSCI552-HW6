@@ -1,0 +1,110 @@
+{
+  "signature": {
+    "schema": 1,
+    "legacy_signature": {
+      "schema": 2,
+      "data": {
+        "training": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da",
+        "test": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3"
+      },
+      "config": {
+        "seed": 552,
+        "threshold": 0.5,
+        "alphas": [
+          0.0,
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0,
+          100.0
+        ],
+        "supplement": "plain search restricted alpha > 0, same AP and smaller-alpha tie rule",
+        "features": 170,
+        "cv_selection": "mean average precision; smaller-alpha tie break",
+        "imputation": {
+          "strategy": "median",
+          "keep_empty_features": true,
+          "main_test": "test-own medians",
+          "sensitivity": "train medians",
+          "cv": "training-fold only"
+        },
+        "rf": {
+          "n_estimators": 500,
+          "criterion": "gini",
+          "max_features": "sqrt",
+          "bootstrap": true,
+          "oob_score": true,
+          "max_depth": null,
+          "min_samples_leaf": 1,
+          "random_state": 552,
+          "n_jobs": 4
+        },
+        "xgb": {
+          "booster": "gbtree",
+          "objective": "binary:logistic",
+          "reg_lambda": 1,
+          "n_estimators": 250,
+          "max_depth": 4,
+          "learning_rate": 0.08,
+          "subsample": 1,
+          "colsample_bytree": 1,
+          "min_child_weight": 1,
+          "tree_method": "hist",
+          "max_bin": 256,
+          "n_jobs": 4,
+          "random_state": 552,
+          "eval_metric": "logloss",
+          "base_score": 0.5
+        },
+        "smote": {
+          "random_state": 552,
+          "k_neighbors": 5,
+          "sampling_strategy": 1.0
+        },
+        "cv": {
+          "n_splits": 5,
+          "shuffle": true,
+          "random_state": 552
+        }
+      },
+      "model_code_sha256": "4856e831818ff130e257cc1c0c5906675a12b6dc9a8d84059333df49b2f35ff2",
+      "versions": {
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "scikit-learn": "1.9.1",
+        "xgboost": "3.4.1",
+        "imbalanced-learn": "0.14.2",
+        "joblib": "1.6.0"
+      }
+    },
+    "legacy_manifest_sha256": "5e74fcb98d3e5190b8246dfe4f237779d59d573f626378d2b992338c1fd8f753",
+    "original_rf_sha256": {
+      "rf_plain": "5984834af03f13f857d19d30c9b6d0b6bc022ed389b1f8cd4f13efe95ea1aa0c",
+      "rf_balanced": "58d26c4700af181db9e817e4a3e303cb5df0ed643f4daa926a038be497a99587"
+    },
+    "audit_code_sha256": "737d0f3b2ac5a8d4040d6ef0e6b3d4f6e3c33b178d8e73b74b4e0957d41e2bb5",
+    "sklearn_version": "1.9.1",
+    "sklearn_forest_source_sha256": "ddf75afd3c1fb4d1b29e5154436ec1684e8969bffed4eef4718af53e2260ca7c",
+    "supplemental_parameters": {
+      "n_estimators": 500,
+      "criterion": "gini",
+      "max_features": "sqrt",
+      "bootstrap": true,
+      "oob_score": true,
+      "max_depth": null,
+      "min_samples_leaf": 1,
+      "random_state": 552,
+      "n_jobs": 4,
+      "class_weight": "balanced_subsample"
+    }
+  },
+  "source": {
+    "_generate_sample_indices": "def _generate_sample_indices(\n    random_state, n_samples, n_samples_bootstrap, sample_weight\n):\n    \"\"\"\n    Private function used to _parallel_build_trees function.\"\"\"\n\n    random_instance = check_random_state(random_state)\n    if sample_weight is None:\n        sample_indices = random_instance.randint(0, n_samples, n_samples_bootstrap)\n    else:\n        normalized_sample_weight = sample_weight / np.sum(sample_weight)\n        sample_indices = random_instance.choice(\n            n_samples,\n            n_samples_bootstrap,\n            replace=True,\n            p=normalized_sample_weight,\n        )\n    sample_indices = sample_indices.astype(np.int32)\n    return sample_indices\n",
+    "_generate_unsampled_indices": "def _generate_unsampled_indices(\n    random_state, n_samples, n_samples_bootstrap, sample_weight\n):\n    \"\"\"\n    Private function used to forest._set_oob_score function.\"\"\"\n    sample_indices = _generate_sample_indices(\n        random_state, n_samples, n_samples_bootstrap, sample_weight\n    )\n    sample_counts = np.bincount(sample_indices, minlength=n_samples)\n    unsampled_mask = sample_counts == 0\n    indices_range = np.arange(n_samples)\n    unsampled_indices = indices_range[unsampled_mask]\n\n    return unsampled_indices\n",
+    "_parallel_build_trees": "def _parallel_build_trees(\n    tree,\n    bootstrap,\n    X,\n    y,\n    sample_weight,\n    tree_idx,\n    n_trees,\n    verbose=0,\n    class_weight=None,\n    n_samples_bootstrap=None,\n    missing_values_in_feature_mask=None,\n):\n    \"\"\"\n    Private function used to fit a single tree in parallel.\"\"\"\n    if verbose > 1:\n        print(\"building tree %d of %d\" % (tree_idx + 1, n_trees))\n\n    if bootstrap:\n        n_samples = X.shape[0]\n        indices = _generate_sample_indices(\n            tree.random_state, n_samples, n_samples_bootstrap, sample_weight\n        )\n        # Simulate row-wise sampling by passing counts as sample_weight in trees.\n        sample_weight_tree = np.bincount(indices, minlength=n_samples)\n        if class_weight == \"balanced_subsample\":\n            expanded_class_weight = compute_sample_weight(\n                \"balanced\", y, indices=indices\n            )\n            sample_weight_tree = sample_weight_tree * expanded_class_weight\n\n        tree._fit(\n            X,\n            y,\n            sample_weight=sample_weight_tree,\n            check_input=False,\n            missing_values_in_feature_mask=missing_values_in_feature_mask,\n        )\n    else:\n        tree._fit(\n            X,\n            y,\n            sample_weight=sample_weight,\n            check_input=False,\n            missing_values_in_feature_mask=missing_values_in_feature_mask,\n        )\n\n    return tree\n",
+    "oob": "    def _compute_oob_predictions(self, X, y):\n        \"\"\"Compute and set the OOB score.\n\n        Parameters\n        ----------\n        X : array-like of shape (n_samples, n_features)\n            The data matrix.\n        y : ndarray of shape (n_samples, n_outputs)\n            The target matrix.\n\n        Returns\n        -------\n        oob_pred : ndarray of shape (n_samples, n_classes, n_outputs) or \\\n                (n_samples, 1, n_outputs)\n            The OOB predictions.\n        \"\"\"\n        # Prediction requires X to be in CSR format\n        if issparse(X):\n            X = X.tocsr()\n\n        n_samples = y.shape[0]\n        n_outputs = self.n_outputs_\n        if is_classifier(self) and hasattr(self, \"n_classes_\"):\n            # n_classes_ is an ndarray at this stage\n            # all the supported type of target will have the same number of\n            # classes in all outputs\n            oob_pred_shape = (n_samples, self.n_classes_[0], n_outputs)\n        else:\n            # for regression, n_classes_ does not exist and we create an empty\n            # axis to be consistent with the classification case and make\n            # the array operations compatible with the 2 settings\n            oob_pred_shape = (n_samples, 1, n_outputs)\n\n        oob_pred = np.zeros(shape=oob_pred_shape, dtype=np.float64)\n        n_oob_pred = np.zeros((n_samples, n_outputs), dtype=np.int64)\n        for estimator in self.estimators_:\n            unsampled_indices = _generate_unsampled_indices(\n                estimator.random_state,\n                n_samples,\n                self._n_samples_bootstrap,\n                self._sample_weight,\n            )\n\n            y_pred = self._get_oob_predictions(estimator, X[unsampled_indices, :])\n            oob_pred[unsampled_indices, ...] += y_pred\n            n_oob_pred[unsampled_indices, :] += 1\n\n        for k in range(n_outputs):\n            if (n_oob_pred == 0).any():\n                warn(\n                    (\n                        \"Some inputs do not have OOB scores. This probably means \"\n                        \"too few trees were used to compute any reliable OOB \"\n                        \"estimates.\"\n                    ),\n                    UserWarning,\n                )\n                n_oob_pred[n_oob_pred == 0] = 1\n            oob_pred[..., k] /= n_oob_pred[..., [k]]\n\n        return oob_pred\n",
+    "indices_property": "    def _get_estimators_indices(self):\n        # Get drawn indices along both sample and feature axes\n        for tree in self.estimators_:\n            if not self.bootstrap:\n                yield np.arange(self._n_samples, dtype=np.int32)\n            else:\n                # tree.random_state is actually an immutable integer seed rather\n                # than a mutable RandomState instance, so it's safe to use it\n                # repeatedly when calling this property.\n                seed = tree.random_state\n                # Operations accessing random_state must be performed identically\n                # to those in `_parallel_build_trees()`\n                yield _generate_sample_indices(\n                    seed,\n                    self._n_samples,\n                    self._n_samples_bootstrap,\n                    self._sample_weight,\n                )\n",
+    "class_weights": "    def _validate_y_class_weight(self, y, sample_weight):\n        check_classification_targets(y)\n\n        y_original = np.copy(y)\n        self.classes_ = []\n        self.n_classes_ = []\n\n        y_store_unique_indices = np.zeros(y.shape, dtype=int)\n        for k in range(self.n_outputs_):\n            classes_k, y_store_unique_indices[:, k] = np.unique(\n                y[:, k], return_inverse=True\n            )\n            self.classes_.append(classes_k)\n            self.n_classes_.append(classes_k.shape[0])\n        y = y_store_unique_indices\n\n        if self.class_weight is None:\n            return y, None\n\n        # User defined class_weight (dict or list)\n        if isinstance(self.class_weight, (dict, list)):\n            expanded_class_weight = compute_sample_weight(self.class_weight, y_original)\n            return y, expanded_class_weight\n\n        # Checking class_weight options\n        valid_presets = (\"balanced\", \"balanced_subsample\")\n        if self.class_weight not in valid_presets:\n            raise ValueError(\n                \"Valid presets for class_weight include \"\n                '\"balanced\" and \"balanced_subsample\".'\n                'Given \"%s\".' % self.class_weight\n            )\n        if self.warm_start:\n            warn(\n                'class_weight presets \"balanced\" or '\n                '\"balanced_subsample\" are '\n                \"not recommended for warm_start if the fitted data \"\n                \"differs from the full dataset. In order to use \"\n                '\"balanced\" weights, use compute_class_weight '\n                '(\"balanced\", classes, y). In place of y you can use '\n                \"a large enough sample of the full training set \"\n                \"target to properly estimate the class frequency \"\n                \"distributions. Pass the resulting weights as the \"\n                \"class_weight parameter.\"\n            )\n\n        # \"balanced_subsample\" option with subsampling (bootstrap=True)\n        if self.class_weight == \"balanced_subsample\" and self.bootstrap:\n            # class_weight will be computed on the bootstrap sample\n            return y, None\n\n        # Computing class_weight (dict or list) for the \"balanced\" option.\n        # The \"balanced_subsample\" option without subsampling (bootstrap=False)\n        # is equivalent to the \"balanced\" option.\n        class_weight = []\n        for k in range(self.n_outputs_):\n            class_weight_k_vect = compute_class_weight(\n                \"balanced\",\n                classes=self.classes_[k],\n                y=y_original[:, k],\n                sample_weight=sample_weight,\n            )\n            class_weight_k = {\n                key: val for (key, val) in zip(self.classes_[k], class_weight_k_vect)\n            }\n            class_weight.append(class_weight_k)\n        if self.n_outputs_ == 1:\n            class_weight = class_weight[0]\n\n        expanded_class_weight = compute_sample_weight(class_weight, y_original)\n        return y, expanded_class_weight\n"
+  }
+}

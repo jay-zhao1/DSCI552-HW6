@@ -1,0 +1,357 @@
+{
+  "all_passed": true,
+  "sklearn_version": "1.9.1",
+  "original_model_cache_fingerprint_unchanged": true,
+  "preserved_files": 47,
+  "original_forest_and_xgb_smote_cv_refits": 0,
+  "new_fits_this_review": 1,
+  "new_fit": "500-tree balanced_subsample forest only",
+  "current_quick_fit_count": 0,
+  "clean_kernel_code_cells": 31,
+  "kernel_errors": 0,
+  "coverage": {
+    "rf_plain": {
+      "total": {
+        "n": 60000,
+        "valid": 60000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 184.00173333333333
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 144,
+          "max_votes": 228,
+          "mean_votes": 183.99642372881357
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 1000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 151,
+          "max_votes": 214,
+          "mean_votes": 184.315
+        }
+      },
+      "all_zero_probability_rows": 0,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.005816666666666667,
+      "valid_error": 0.005816666666666667,
+      "valid_errors": 349,
+      "valid_denominator": 60000,
+      "full_class_coverage": true,
+      "warning_expected": false,
+      "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+      "treewise_probabilities_reconstructed": true
+    },
+    "rf_balanced": {
+      "total": {
+        "n": 60000,
+        "valid": 59000,
+        "zero_votes": 1000,
+        "valid_fraction": 0.9833333333333333,
+        "min_votes": 0,
+        "max_votes": 347,
+        "mean_votes": 295.62905
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 251,
+          "max_votes": 347,
+          "mean_votes": 300.63971186440676
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 0,
+          "zero_votes": 1000,
+          "valid_fraction": 0.0,
+          "min_votes": 0,
+          "max_votes": 0,
+          "mean_votes": 0.0
+        }
+      },
+      "all_zero_probability_rows": 1000,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.019983333333333332,
+      "valid_error": 0.0033728813559322033,
+      "valid_errors": 199,
+      "valid_denominator": 59000,
+      "full_class_coverage": false,
+      "warning_expected": true,
+      "bootstrap_indices_sha256": "3b3634ee7d422e0a3ccbf8b61ff2fbdde625bcc3bb5f02dab7a55871ab2a45ea",
+      "treewise_probabilities_reconstructed": true
+    },
+    "rf_balanced_subsample": {
+      "total": {
+        "n": 60000,
+        "valid": 60000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 184.00173333333333
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 144,
+          "max_votes": 228,
+          "mean_votes": 183.99642372881357
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 1000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 151,
+          "max_votes": 214,
+          "mean_votes": 184.315
+        }
+      },
+      "all_zero_probability_rows": 0,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.0076166666666666666,
+      "valid_error": 0.0076166666666666666,
+      "valid_errors": 457,
+      "valid_denominator": 60000,
+      "full_class_coverage": true,
+      "warning_expected": false,
+      "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+      "treewise_probabilities_reconstructed": true
+    }
+  },
+  "probability_integrity": {
+    "rf_plain": {
+      "out_of_range_rows": 0,
+      "nan_rows": 0,
+      "inf_rows": 0
+    },
+    "rf_balanced": {
+      "out_of_range_rows": 0,
+      "nan_rows": 0,
+      "inf_rows": 0
+    },
+    "rf_balanced_subsample": {
+      "out_of_range_rows": 0,
+      "nan_rows": 0,
+      "inf_rows": 0
+    }
+  },
+  "weighted_sampling_expectation": {
+    "neg": {
+      "draw_probability": 8.474576271186442e-06,
+      "expected_draws_per_tree": 0.5084745762711865,
+      "expected_oob_votes_per_row": 300.7054961218595
+    },
+    "pos": {
+      "draw_probability": 0.0005000000000000001,
+      "expected_draws_per_tree": 30.000000000000007,
+      "expected_oob_votes_per_row": 4.6438400475268994e-11
+    }
+  },
+  "warning_source": "rf_balanced: exact installed-source zero-contribution trigger; all1000 positives have zero votes",
+  "balanced_overall_oob_available": false,
+  "historical_unmasked_error_retained": true,
+  "invalid_overall_gap_conclusion_withdrawn": true,
+  "sidecar_negative_tests": {
+    "signature_mismatch_rejected": true,
+    "artifact_mismatch_rejected": true
+  },
+  "supplemental_model": {
+    "train": {
+      "n": 60000,
+      "error": 0.0,
+      "auc": 1.0,
+      "average_precision": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion_matrix": [
+        [
+          59000,
+          0
+        ],
+        [
+          0,
+          1000
+        ]
+      ]
+    },
+    "test": {
+      "n": 16000,
+      "error": 0.010625,
+      "auc": 0.9945430186666667,
+      "average_precision": 0.8863318205503123,
+      "precision": 0.9399141630901288,
+      "recall": 0.584,
+      "f1": 0.7203947368421053,
+      "confusion_matrix": [
+        [
+          15611,
+          14
+        ],
+        [
+          156,
+          219
+        ]
+      ]
+    },
+    "test_train_only_imputation": {
+      "n": 16000,
+      "error": 0.0105625,
+      "auc": 0.9945439573333331,
+      "average_precision": 0.8867377632651356,
+      "precision": 0.9401709401709402,
+      "recall": 0.5866666666666667,
+      "f1": 0.722495894909688,
+      "confusion_matrix": [
+        [
+          15611,
+          14
+        ],
+        [
+          155,
+          220
+        ]
+      ]
+    },
+    "oob": {
+      "total": {
+        "n": 60000,
+        "valid": 60000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 184.00173333333333
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 144,
+          "max_votes": 228,
+          "mean_votes": 183.99642372881357
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 1000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 151,
+          "max_votes": 214,
+          "mean_votes": 184.315
+        }
+      },
+      "all_zero_probability_rows": 0,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.0076166666666666666,
+      "valid_error": 0.0076166666666666666,
+      "valid_errors": 457,
+      "valid_denominator": 60000,
+      "full_class_coverage": true,
+      "warning_expected": false,
+      "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+      "treewise_probabilities_reconstructed": true
+    },
+    "fit_audit_evaluate_seconds": 41.7340748750139,
+    "parameters": {
+      "bootstrap": true,
+      "ccp_alpha": 0.0,
+      "class_weight": "balanced_subsample",
+      "criterion": "gini",
+      "max_depth": null,
+      "max_features": "sqrt",
+      "max_leaf_nodes": null,
+      "max_samples": null,
+      "min_impurity_decrease": 0.0,
+      "min_samples_leaf": 1,
+      "min_samples_split": 2,
+      "min_weight_fraction_leaf": 0.0,
+      "monotonic_cst": null,
+      "n_estimators": 500,
+      "n_jobs": 4,
+      "oob_score": true,
+      "random_state": 552,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "warnings": [],
+    "rationale": "Uniform bootstrap with per-tree balanced impurity weights permits both-class OOB coverage; supplementary, not a replacement."
+  },
+  "cache_migration": {
+    "all_passed": true,
+    "source_change_verified_exactly_one_postfit_assertion": true,
+    "all_fits_forbidden_during_revalidation": true,
+    "all_artifact_hashes_identical": true,
+    "original_sidecar_preserved": true,
+    "parent_manifest_sha256": "79bf0c5c9db04600483ca0308ab2bacb6c184fd123673ccfb10e5ccb2bd6732a",
+    "parameters_all_predictions_and_actual_bootstrap_oob_recomputed": true
+  },
+  "notebook_self_contained": true,
+  "all_78_pairs_retained": true,
+  "all_q1_to_q6_retained": true,
+  "pdf_pages": 20,
+  "body_font_pt": 10.4,
+  "code_font_pt": 8.7,
+  "pdf_all_code_lines_and_table_values_verified": true,
+  "visual_review": {
+    "pdf_sha256": "390285161b2f7ec48cb1b22f02a91a08f10218e39bdccaf2a237c5a560c0344b",
+    "pages": 20,
+    "all_pages_rendered": true,
+    "reviewed_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "render_scale": 1.5,
+    "method": "Inspected all20 pages in five contact sheets; enlarged and inspected pages5,6,7,8.",
+    "clipping_overlap_or_unreadable_formulas_found": false,
+    "body_font_pt": 10.4,
+    "code_font_pt": 8.7,
+    "changes": "Pages5-8 now show actual-index OOB masking, per-class coverage, invalid historical balanced value and a full-coverage supplemental forest; remaining Q1-Q6 retained.",
+    "browser_print_preview_directly_checked": false
+  },
+  "browser_print_preview_checked": false
+}

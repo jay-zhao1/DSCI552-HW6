@@ -1,0 +1,110 @@
+{
+  "executed": true,
+  "mode": "quick",
+  "clean_kernel": true,
+  "isolated_directory": "tmp/standalone_b2zqrfyf",
+  "isolated_contents": "Notebook, two raw CSVs, validated cache; no scripts/ or references/.",
+  "code_cells": 28,
+  "errors": 0,
+  "aps_models_retrained": false,
+  "full_training_mode_executed": false,
+  "output_directory": "results/notebook_runs/quick_20261107T081417_132816Z",
+  "seconds": 58.78380220895633,
+  "validation": {
+    "all_passed": true,
+    "checks": [
+      "rf_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "rf_balanced: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "xgb_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "xgb_smote: parameters, all three prediction sets, metrics and CV/OOB verified"
+    ],
+    "validation_scope": "Serialized final-model predictions re-evaluated on all original train/test rows and train-only sensitivity. Saved 70 CV fold scores and alpha selection recomputed; CV estimators are not refitted in quick mode.",
+    "mode": "quick",
+    "trained_from_raw_this_run": false,
+    "cache_signature": {
+      "schema": 1,
+      "data": {
+        "training": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da",
+        "test": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3"
+      },
+      "config": {
+        "seed": 552,
+        "threshold": 0.5,
+        "alphas": [
+          0.0,
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0,
+          100.0
+        ],
+        "features": 170,
+        "cv_selection": "mean average precision; smaller-alpha tie break",
+        "imputation": {
+          "strategy": "median",
+          "keep_empty_features": true,
+          "main_test": "test-own medians",
+          "sensitivity": "train medians",
+          "cv": "training-fold only"
+        },
+        "rf": {
+          "n_estimators": 500,
+          "criterion": "gini",
+          "max_features": "sqrt",
+          "bootstrap": true,
+          "oob_score": true,
+          "max_depth": null,
+          "min_samples_leaf": 1,
+          "random_state": 552,
+          "n_jobs": 4
+        },
+        "xgb": {
+          "booster": "gbtree",
+          "objective": "binary:logistic",
+          "reg_lambda": 1,
+          "n_estimators": 250,
+          "max_depth": 4,
+          "learning_rate": 0.08,
+          "subsample": 1,
+          "colsample_bytree": 1,
+          "min_child_weight": 1,
+          "tree_method": "hist",
+          "max_bin": 256,
+          "n_jobs": 4,
+          "random_state": 552,
+          "eval_metric": "logloss",
+          "base_score": 0.5
+        },
+        "smote": {
+          "random_state": 552,
+          "k_neighbors": 5,
+          "sampling_strategy": 1.0
+        },
+        "cv": {
+          "n_splits": 5,
+          "shuffle": true,
+          "random_state": 552
+        }
+      },
+      "model_code_sha256": "67ab0f2991143fb1f152403ab8a72d09c26a1912485c1a656ba50eeea5cd510c",
+      "versions": {
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "scikit-learn": "1.9.1",
+        "xgboost": "3.4.1",
+        "imbalanced-learn": "0.14.2",
+        "joblib": "1.6.0"
+      }
+    },
+    "cache_provenance": {
+      "mode": "validated historical full-data experiment",
+      "trained_from_raw_this_run": false,
+      "baseline_commit": "4baf619",
+      "migration_validation": "Serialized final-model predictions re-evaluated on all original train/test rows and train-only sensitivity. Saved 70 CV fold scores and alpha selection recomputed; CV estimators are not refitted in quick mode.",
+      "original_model_source_sha256": "a4d37aba4991b9fa6a0998276cbcbd279f6497a780fe71bcb4cab7dd3613cdc8",
+      "parameter_and_preprocessing_equivalence": "All 4 parameter dictionaries; training imputer/scaler statistics; 5 fold memberships; original train/test/sensitivity predictions reproduced.",
+      "limitation": "Historical CV fits are not rerun; their saved fold-score summaries and alpha selection are verified."
+    }
+  }
+}

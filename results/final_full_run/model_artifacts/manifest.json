@@ -1,0 +1,107 @@
+{
+  "signature": {
+    "schema": 2,
+    "data": {
+      "training": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da",
+      "test": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3"
+    },
+    "config": {
+      "seed": 552,
+      "threshold": 0.5,
+      "alphas": [
+        0.0,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0
+      ],
+      "supplement": "plain search restricted alpha > 0, same AP and smaller-alpha tie rule",
+      "features": 170,
+      "cv_selection": "mean average precision; smaller-alpha tie break",
+      "imputation": {
+        "strategy": "median",
+        "keep_empty_features": true,
+        "main_test": "test-own medians",
+        "sensitivity": "train medians",
+        "cv": "training-fold only"
+      },
+      "rf": {
+        "n_estimators": 500,
+        "criterion": "gini",
+        "max_features": "sqrt",
+        "bootstrap": true,
+        "oob_score": true,
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "random_state": 552,
+        "n_jobs": 4
+      },
+      "xgb": {
+        "booster": "gbtree",
+        "objective": "binary:logistic",
+        "reg_lambda": 1,
+        "n_estimators": 250,
+        "max_depth": 4,
+        "learning_rate": 0.08,
+        "subsample": 1,
+        "colsample_bytree": 1,
+        "min_child_weight": 1,
+        "tree_method": "hist",
+        "max_bin": 256,
+        "n_jobs": 4,
+        "random_state": 552,
+        "eval_metric": "logloss",
+        "base_score": 0.5
+      },
+      "smote": {
+        "random_state": 552,
+        "k_neighbors": 5,
+        "sampling_strategy": 1.0
+      },
+      "cv": {
+        "n_splits": 5,
+        "shuffle": true,
+        "random_state": 552
+      }
+    },
+    "model_code_sha256": "4856e831818ff130e257cc1c0c5906675a12b6dc9a8d84059333df49b2f35ff2",
+    "versions": {
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "scikit-learn": "1.9.1",
+      "xgboost": "3.4.1",
+      "imbalanced-learn": "0.14.2",
+      "joblib": "1.6.0"
+    }
+  },
+  "files": {
+    "rf_balanced.json": "266daccede6a803e3a1e2e5ee9303a7243b855d0adfaab83137085b0402be272",
+    "xgb_plain_predictions.npz": "e35ecfbb95be1282f020a32a1349fcad8ec45ce84daa40c4daa7f2646cfbcfb5",
+    "xgb_plain_cv_summary.csv": "966ccd420fb3173f348a4a806c5e6eb2a8dc431108cba7d524cd931f171088e3",
+    "xgb_smote_cv_summary.csv": "525cbb268f9b2a6529d974c7359044582dbd8ed22bc0ce44b706fd3ad6e27b25",
+    "rf_balanced.joblib": "58d26c4700af181db9e817e4a3e303cb5df0ed643f4daa926a038be497a99587",
+    "xgb_plain.json": "45bd5e187f6cc3e863b28489f604e6ebed6d619d5e26cd9a6f17eaab5a5bb9bb",
+    "xgb_smote_predictions.npz": "8c49a22aacf8883b4567dd1052f88d0fdb1eb8b29dbd6e7c9fe5ea0524ef0abf",
+    "xgb_positive.joblib": "bd66809167533b901e5e5cc87b033fcff9ba2cb7bbbcb6c33f6c87e6e6683ee8",
+    "rf_plain.joblib": "5984834af03f13f857d19d30c9b6d0b6bc022ed389b1f8cd4f13efe95ea1aa0c",
+    "xgb_plain.joblib": "f2473b278870bcba8f8be8464538a0cce5acb210270454db6f0b9b70a2ce2884",
+    "rf_plain.json": "c88694ef6666c77dfc58a17004ae736a7b2a2e674ec16915af2b61eb1d216c92",
+    "cv_folds.npz": "5a3572868007366a2bc61888b0a75e17cbe1a0052fc64bfa30b70b83fbca643d",
+    "xgb_smote_cv_folds.csv": "d82edb6c13a8e1370f77513cbb9fb45fbdb4fe679cacfc6a2c522a3e749dddfa",
+    "xgb_smote.json": "1d076700d593124cdd96506a8c0cd3467e5686dc8af9ad86b05f448d7f75c90e",
+    "rf_balanced_predictions.npz": "63a1da2f050fd1a97040e92efdbc651fa11d98f9ce9e6684b60597307666b343",
+    "xgb_positive_predictions.npz": "eab0f40b1343fb72fba8849ea7d0c44fc054e9b0f49f2bb9fc40a7e45a57b827",
+    "rf_plain_predictions.npz": "9f587c6b0f24406b79782363d859fe55b3d4dbf124f3046ee2434bb63d4a81ce",
+    "training_events.json": "cab0fcd989f78fd7e060307c80df6ceeded6cc4ab3de6eb005684e05421c9faf",
+    "xgb_positive.json": "1a9e886e5c3cc48d1b64f1d08f5e69705861740e351c73c677ceb2c37af166e9",
+    "xgb_plain_cv_folds.csv": "358f9b191cb7a9e673f1920a16f057e9156e3d7042706c03af620b5d89fc5e1b",
+    "xgb_smote.joblib": "52aa7068861be28345345c20cc04cd147fb45ba7c61ce4532f8b4ab76ba24e47"
+  },
+  "provenance": {
+    "mode": "full",
+    "trained_from_raw_this_run": true,
+    "note": "Five final models and all 70 CV fits executed from raw data; no previous cache read."
+  }
+}

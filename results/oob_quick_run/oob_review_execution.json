@@ -1,0 +1,9 @@
+{
+  "mode": "verify",
+  "new_fits": 0,
+  "original_models_refitted": false,
+  "xgboost_or_smote_or_cv_refitted": false,
+  "sidecar": "results/oob_review/artifacts_v2",
+  "legacy_oob_status": "Historical unmasked arithmetic only; balanced value is not a valid overall OOB estimate.",
+  "coverage_checked_by_actual_indices": true
+}

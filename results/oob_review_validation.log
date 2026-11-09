@@ -1,0 +1,71 @@
+Mode: quick | Output: results/notebook_runs/quick_20261109T042224_605286Z
+QUICK requires the separate matching cache bundle at results/final_full_run/model_artifacts
+Missing cache? Select full mode to train using only the two raw CSVs.
+Full fits 2 forests + 70 CV estimators + 3 final XGBs + 1 OOB-safe supplemental forest.
+OOB_MODE: verify | separate matching OOB sidecar required for verify: results/oob_review/artifacts_v2
+{
+  "all_passed": true,
+  "sklearn_version": "1.9.1",
+  "original_model_cache_fingerprint_unchanged": true,
+  "preserved_files": 47,
+  "original_forest_and_xgb_smote_cv_refits": 0,
+  "new_fits_this_review": 1,
+  "new_fit": "500-tree balanced_subsample forest only",
+  "current_quick_fit_count": 0,
+  "clean_kernel_code_cells": 31,
+  "kernel_errors": 0,
+  "probability_integrity": {
+    "rf_plain": {
+      "out_of_range_rows": 0,
+      "nan_rows": 0,
+      "inf_rows": 0
+    },
+    "rf_balanced": {
+      "out_of_range_rows": 0,
+      "nan_rows": 0,
+      "inf_rows": 0
+    },
+    "rf_balanced_subsample": {
+      "out_of_range_rows": 0,
+      "nan_rows": 0,
+      "inf_rows": 0
+    }
+  },
+  "weighted_sampling_expectation": {
+    "neg": {
+      "draw_probability": 8.474576271186442e-06,
+      "expected_draws_per_tree": 0.5084745762711865,
+      "expected_oob_votes_per_row": 300.7054961218595
+    },
+    "pos": {
+      "draw_probability": 0.0005000000000000001,
+      "expected_draws_per_tree": 30.000000000000007,
+      "expected_oob_votes_per_row": 4.6438400475268994e-11
+    }
+  },
+  "warning_source": "rf_balanced: exact installed-source zero-contribution trigger; all1000 positives have zero votes",
+  "balanced_overall_oob_available": false,
+  "historical_unmasked_error_retained": true,
+  "invalid_overall_gap_conclusion_withdrawn": true,
+  "sidecar_negative_tests": {
+    "signature_mismatch_rejected": true,
+    "artifact_mismatch_rejected": true
+  },
+  "cache_migration": {
+    "all_passed": true,
+    "source_change_verified_exactly_one_postfit_assertion": true,
+    "all_fits_forbidden_during_revalidation": true,
+    "all_artifact_hashes_identical": true,
+    "original_sidecar_preserved": true,
+    "parent_manifest_sha256": "79bf0c5c9db04600483ca0308ab2bacb6c184fd123673ccfb10e5ccb2bd6732a",
+    "parameters_all_predictions_and_actual_bootstrap_oob_recomputed": true
+  },
+  "notebook_self_contained": true,
+  "all_78_pairs_retained": true,
+  "all_q1_to_q6_retained": true,
+  "pdf_pages": 20,
+  "body_font_pt": 10.4,
+  "code_font_pt": 8.7,
+  "pdf_all_code_lines_and_table_values_verified": true,
+  "browser_print_preview_checked": false
+}

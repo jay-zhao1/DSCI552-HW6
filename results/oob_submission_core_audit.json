@@ -1,0 +1,23 @@
+{
+  "all_passed": true,
+  "aps_fit_calls_forbidden_during_audit": true,
+  "original_parameter_dictionaries_equal": {
+    "rf_plain": true,
+    "rf_balanced": true,
+    "xgb_plain": true,
+    "xgb_smote": true,
+    "xgb_positive": true
+  },
+  "cv_fold_indices_equal": true,
+  "imputation_and_scaling_logic_equal": true,
+  "170_feature_cvs_and_top13_equal": true,
+  "all_saved_metrics_recomputed": true,
+  "extra_bootstrap_circle_and_tree_outputs_equal": true,
+  "preserved_experiment_files": 25,
+  "core_source_sha256": "7225dff586980f5f81a1fba1c9f8a4c90b55c9a42eaadae5efe70d6636f80a7a",
+  "q3_check": {
+    "ridge": 0.6666666666666666,
+    "lasso_sum": 1.5,
+    "objective": 3.5
+  }
+}

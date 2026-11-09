@@ -39,7 +39,8 @@ def make_table(head,rows):
     data=[[Paragraph(str(c),styles['CellCustom']) for c in row] for row in [head]+rows]
     n=len(head)
     first=110 if head[0] in ['Model / test','Model / split','Model','Stage'] else 85
-    if n==2 and head[0]=='Region conditions': widths=[360,168]
+    if n==6 and head[0]=='Split': widths=[40,40,70,70,75,233]
+    elif n==2 and head[0]=='Region conditions': widths=[360,168]
     else:widths=[first]+[(W-first)/(n-1)]*(n-1)
     t=Table(data,colWidths=widths,hAlign='LEFT',repeatRows=1)
     t.setStyle(TableStyle([
@@ -63,6 +64,8 @@ class ReportDoc(SimpleDocTemplate):
             self.section_pages.append({'title':f.section_title,'page':self.page})
 
 def build():
+    selection=json.loads((ROOT/'results/final_run_selection.json').read_text())
+    figure_dir=ROOT/selection['report_results']/'figures'
     sections=report_sections();story=[];heights=[];code_lines=0
     for index,(title,blocks) in enumerate(sections):
         heading=Paragraph(title,styles['TitleCustom']);heading.section_title=title
@@ -73,7 +76,9 @@ def build():
             elif kind=='h':parts.append(Paragraph(block[1],styles['SectionCustom']))
             elif kind=='math':parts.extend([equation(block[1]),Spacer(1,5)])
             elif kind=='image':
-                f=ROOT/'figures'/f'{block[1]}.png';a,b=PILImage.open(f).size
+                f=figure_dir/f'{block[1]}.png'
+                if not f.exists(): f=ROOT/'figures'/f'{block[1]}.png'
+                a,b=PILImage.open(f).size
                 parts.extend([Image(str(f),width=block[2],height=b/a*block[2]),Spacer(1,5)])
             elif kind=='table':parts.extend([make_table(block[1],block[2]),Spacer(1,6)])
             elif kind in ['code','output']:

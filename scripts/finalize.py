@@ -7,6 +7,9 @@ import pymupdf
 from content import ROOT,R,NAMES,j
 
 def finalize():
+ if (ROOT/'results/final_quick_execution.json').exists():
+  from validate_final_bounded import validate as validate_current
+  return validate_current()
  report=ROOT/'DSCI552_Homework6_Report.pdf';count=len(PdfReader(report).pages);assert count<=20
  nb=nbformat.read(ROOT/'DSCI552_Homework6.ipynb',as_version=4);codes=[c for c in nb.cells if c.cell_type=='code'];assert all(c.execution_count is not None for c in codes)
  assert not [o for c in codes for o in c.outputs if o.output_type=='error']

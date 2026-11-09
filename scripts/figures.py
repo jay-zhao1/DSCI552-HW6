@@ -36,11 +36,30 @@ def preparation():
     else:ax.set_yticklabels([])
   fig.suptitle('Training scatter matrix: log(1+x); blue neg, red pos',fontsize=13);fig.tight_layout(rect=[0,0,1,.98]);finish(name)
  matrix(top,'scatter_all13',(22,22));matrix(top[:6],'scatter_top6',(9,9))
- # Every one of the 13 is visible in report through shared reference-feature panels.
- fig,axes=plt.subplots(4,3,figsize=(9,10))
- for ax,col in zip(axes.flat,top[1:]):
-  ax.scatter(Z[top[0]],Z[col],c=colors,s=3,alpha=.3,rasterized=True);ax.set(xlabel=f'log(1+{top[0]})',ylabel=f'log(1+{col})');ax.tick_params(labelsize=11);ax.xaxis.label.set_size(13);ax.yaxis.label.set_size(13)
- fig.suptitle('All other selected features versus the highest-CV feature');fig.tight_layout(rect=[0,0,1,.97]);finish('scatter_report')
+ # Paper lower triangle: every unordered pair appears exactly once.
+ from itertools import combinations
+ fig,axes=plt.subplots(12,12,figsize=(7.4,7.4))
+ pairs=[]
+ for i in range(1,13):
+  for j in range(12):
+   ax=axes[i-1,j]
+   if j>=i:
+    ax.axis('off');continue
+   ax.scatter(Z[top[j]],Z[top[i]],c=colors,s=.35,alpha=.22,rasterized=True)
+   ax.set_xticks([]);ax.set_yticks([])
+   if i==12:ax.set_xlabel(top[j],rotation=90,fontsize=9)
+   if j==0:ax.set_ylabel(top[i],rotation=0,ha='right',va='center',fontsize=9)
+   pairs.append([top[j],top[i]])
+ assert {frozenset(v) for v in pairs}=={frozenset(v) for v in combinations(top,2)}
+ assert len(pairs)==78
+ from matplotlib.lines import Line2D
+ handles=[Line2D([0],[0],marker='o',ls='',color=c,label=l,markersize=4)
+          for c,l in [('#3378a6','neg'),('#d34c49','pos')]]
+ fig.legend(handles=handles,loc='upper center',ncol=2,fontsize=10,frameon=False)
+ fig.subplots_adjust(left=.15,right=.99,bottom=.12,top=.95,wspace=.08,hspace=.08)
+ finish('scatter_report')
+ (R/'scatter_pair_coverage.json').write_text(json.dumps(dict(count=78,pairs=pairs,
+     complete=True,seed=SEED,n_negative=2500,n_positive=1000,transform='log1p'),indent=2))
  fig,axes=plt.subplots(5,3,figsize=(10,10))
  for ax,col in zip(axes.flat,top):
   ax.boxplot([np.log1p(D.loc[y==c,col]) for c in [0,1]],tick_labels=['neg','pos'],showfliers=False,patch_artist=True,boxprops={'facecolor':'#bbd6e6'});ax.set_title(col,fontsize=14);ax.set_ylabel('log(1+x)',fontsize=13);ax.tick_params(labelsize=12)
@@ -64,7 +83,7 @@ def preparation():
 
 def model_figures():
  (X,y),(T,yt),_=load_data()
- for name in ['rf_plain','rf_balanced','xgb_plain','xgb_smote']:
+ for name in ['rf_plain','rf_balanced','xgb_plain','xgb_smote','xgb_positive','rf_balanced_subsample']:
   if not (R/f'{name}.json').exists():continue
   d=json.loads((R/f'{name}.json').read_text());p=np.load(R/f'{name}_predictions.npz');fig,axes=plt.subplots(1,3,figsize=(11,3.4))
   for ax,split in zip(axes[:2],['train','test']):

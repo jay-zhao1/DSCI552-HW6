@@ -1,11 +1,8 @@
 {
   "all_passed": true,
-  "formal_notebook_code_and_outputs_unchanged": true,
-  "original_code_cells": 20,
-  "new_executed_code_cells": 8,
-  "notebook_errors": 0,
-  "original_experiment_files_hash_verified": 21,
-  "model_retraining_performed": false,
+  "source": "Fresh standalone clean-kernel execution",
+  "original_models_preserved": true,
+  "new_aps_training": false,
   "all_four_extra_exercises_complete": true,
   "exercise_statement_ambiguities": [],
   "main_report_pages": 20,
@@ -16,9 +13,8 @@
     18,
     19
   ],
-  "organization": "merged into main report",
   "bootstrap_and_ridge_numeric_checks_passed": true,
   "tree_grid_points_checked": 6561,
   "circle_classifications_verified": true,
-  "report_text_bounds_and_replacement_character_checks_passed": true
+  "verified_textbook_hashes_unchanged": true
 }

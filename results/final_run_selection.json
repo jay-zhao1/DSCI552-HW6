@@ -1,0 +1,7 @@
+{
+  "report_results": "results/oob_scope_quick_run",
+  "cache_schema": 2,
+  "cache_source": "results/final_full_run/model_artifacts",
+  "policy": "Original full-run fits unchanged. Current report uses fresh quick predictions plus actual-index OOB audit and independent supplemental forest.",
+  "oob_sidecar": "results/oob_review/artifacts_v2"
+}

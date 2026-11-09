@@ -1,0 +1,13 @@
+{
+  "all_passed": true,
+  "provenance": {
+    "mode": "validated historical full-data experiment",
+    "trained_from_raw_this_run": false,
+    "baseline_commit": "4baf619",
+    "migration_validation": "Serialized final-model predictions re-evaluated on all original train/test rows and train-only sensitivity. Saved 70 CV fold scores and alpha selection recomputed; CV estimators are not refitted in quick mode.",
+    "original_model_source_sha256": "a4d37aba4991b9fa6a0998276cbcbd279f6497a780fe71bcb4cab7dd3613cdc8",
+    "parameter_and_preprocessing_equivalence": "All 4 parameter dictionaries; training imputer/scaler statistics; 5 fold memberships; original train/test/sensitivity predictions reproduced.",
+    "limitation": "Historical CV fits are not rerun; their saved fold-score summaries and alpha selection are verified."
+  },
+  "files": 17
+}

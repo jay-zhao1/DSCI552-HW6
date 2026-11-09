@@ -5,5 +5,6 @@
   "previous_code_cells": 28,
   "total_code_cells": 30,
   "aps_models_retrained": false,
-  "execution_mode": "New compact core and independent audit only, in a fresh kernel."
+  "execution_mode": "New compact core and independent audit only, in a fresh kernel.",
+  "historical_record_superseded_by": "standalone_notebook_execution.json"
 }

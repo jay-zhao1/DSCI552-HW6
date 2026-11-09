@@ -1,0 +1,5 @@
+# Generated document/model formats are binary artifacts, not line-oriented source.
+*.pdf binary
+*.png binary
+*.joblib binary
+*.npz binary

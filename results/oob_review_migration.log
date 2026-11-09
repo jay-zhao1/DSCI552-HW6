@@ -1,0 +1,135 @@
+Mode: quick | Output: results/notebook_runs/quick_20261109T040712_933889Z
+QUICK requires the separate matching cache bundle at results/final_full_run/model_artifacts
+Missing cache? Select full mode to train using only the two raw CSVs.
+Full fits 2 forests + 70 CV estimators + 2 selected XGBs + 1 positive-alpha supplement.
+{
+  "rf_plain": {
+    "total": {
+      "n": 60000,
+      "valid": 60000,
+      "zero_votes": 0,
+      "valid_fraction": 1.0,
+      "min_votes": 144,
+      "max_votes": 228,
+      "mean_votes": 184.00173333333333
+    },
+    "by_class": {
+      "neg": {
+        "n": 59000,
+        "valid": 59000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 183.99642372881357
+      },
+      "pos": {
+        "n": 1000,
+        "valid": 1000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 151,
+        "max_votes": 214,
+        "mean_votes": 184.315
+      }
+    },
+    "all_zero_probability_rows": 0,
+    "nan_rows": 0,
+    "nonfinite_rows": 0,
+    "other_invalid_rows": 0,
+    "historical_unmasked_error": 0.005816666666666667,
+    "valid_error": 0.005816666666666667,
+    "valid_errors": 349,
+    "valid_denominator": 60000,
+    "full_class_coverage": true,
+    "warning_expected": false,
+    "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+    "treewise_probabilities_reconstructed": true
+  },
+  "rf_balanced": {
+    "total": {
+      "n": 60000,
+      "valid": 59000,
+      "zero_votes": 1000,
+      "valid_fraction": 0.9833333333333333,
+      "min_votes": 0,
+      "max_votes": 347,
+      "mean_votes": 295.62905
+    },
+    "by_class": {
+      "neg": {
+        "n": 59000,
+        "valid": 59000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 251,
+        "max_votes": 347,
+        "mean_votes": 300.63971186440676
+      },
+      "pos": {
+        "n": 1000,
+        "valid": 0,
+        "zero_votes": 1000,
+        "valid_fraction": 0.0,
+        "min_votes": 0,
+        "max_votes": 0,
+        "mean_votes": 0.0
+      }
+    },
+    "all_zero_probability_rows": 1000,
+    "nan_rows": 0,
+    "nonfinite_rows": 0,
+    "other_invalid_rows": 0,
+    "historical_unmasked_error": 0.019983333333333332,
+    "valid_error": 0.0033728813559322033,
+    "valid_errors": 199,
+    "valid_denominator": 59000,
+    "full_class_coverage": false,
+    "warning_expected": true,
+    "bootstrap_indices_sha256": "3b3634ee7d422e0a3ccbf8b61ff2fbdde625bcc3bb5f02dab7a55871ab2a45ea",
+    "treewise_probabilities_reconstructed": true
+  },
+  "rf_balanced_subsample": {
+    "total": {
+      "n": 60000,
+      "valid": 60000,
+      "zero_votes": 0,
+      "valid_fraction": 1.0,
+      "min_votes": 144,
+      "max_votes": 228,
+      "mean_votes": 184.00173333333333
+    },
+    "by_class": {
+      "neg": {
+        "n": 59000,
+        "valid": 59000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 183.99642372881357
+      },
+      "pos": {
+        "n": 1000,
+        "valid": 1000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 151,
+        "max_votes": 214,
+        "mean_votes": 184.315
+      }
+    },
+    "all_zero_probability_rows": 0,
+    "nan_rows": 0,
+    "nonfinite_rows": 0,
+    "other_invalid_rows": 0,
+    "historical_unmasked_error": 0.0076166666666666666,
+    "valid_error": 0.0076166666666666666,
+    "valid_errors": 457,
+    "valid_denominator": 60000,
+    "full_class_coverage": true,
+    "warning_expected": false,
+    "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+    "treewise_probabilities_reconstructed": true
+  }
+}

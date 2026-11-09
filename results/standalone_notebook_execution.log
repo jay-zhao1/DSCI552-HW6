@@ -1,0 +1,14 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+{
+  "executed": true,
+  "mode": "quick",
+  "clean_kernel": true,
+  "isolated_directory": "tmp/standalone_b2zqrfyf",
+  "isolated_contents": "Notebook, two raw CSVs, validated cache; no scripts/ or references/.",
+  "code_cells": 28,
+  "errors": 0,
+  "aps_models_retrained": false,
+  "full_training_mode_executed": false,
+  "output_directory": "results/notebook_runs/quick_20261107T081417_132816Z",
+  "seconds": 58.78380220895633
+}

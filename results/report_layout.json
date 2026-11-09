@@ -9,7 +9,7 @@
     "top": 32,
     "bottom": 38
   },
-  "core_code_lines_printed": 285,
+  "core_code_lines_printed": 308,
   "sections": [
     {
       "title": "1(a)-(b)(ii). Data, imputation and feature statistics",
@@ -36,11 +36,11 @@
       "page": 6
     },
     {
-      "title": "1(e)-(f). XGBoost interpretation and fold-local Pipeline",
+      "title": "1(e)-(f). Pipeline; coverage-aware RF OOB review",
       "page": 7
     },
     {
-      "title": "1(e)-(f). Alpha search: code and actual five-fold outputs",
+      "title": "1(e)-(f). CV outputs; supplemental forest evaluation",
       "page": 8
     },
     {
@@ -96,17 +96,17 @@
     {
       "section": 1,
       "title": "1(a)-(b)(ii). Data, imputation and feature statistics",
-      "estimated_height": 619.8
+      "estimated_height": 634.6
     },
     {
       "section": 2,
       "title": "1(b)(iii). Correlation and shared scatter-matrix code",
-      "estimated_height": 643.7945717732207
+      "estimated_height": 688.1945717732208
     },
     {
       "section": 3,
       "title": "1(b)(iv). Scatter plots: the 13 highest-CV features",
-      "estimated_height": 683.681212841855
+      "estimated_height": 674.5641337386018
     },
     {
       "section": 4,
@@ -116,27 +116,27 @@
     {
       "section": 5,
       "title": "1(c)-(d). Common evaluation and forest training code",
-      "estimated_height": 541.7
+      "estimated_height": 665.9
     },
     {
       "section": 6,
       "title": "1(c)-(d). Forest outputs and OOB comparison",
-      "estimated_height": 557.6536548980607
+      "estimated_height": 609.6536548980607
     },
     {
       "section": 7,
-      "title": "1(e)-(f). XGBoost interpretation and fold-local Pipeline",
-      "estimated_height": 389.3545454545455
+      "title": "1(e)-(f). Pipeline; coverage-aware RF OOB review",
+      "estimated_height": 647.3545454545455
     },
     {
       "section": 8,
-      "title": "1(e)-(f). Alpha search: code and actual five-fold outputs",
-      "estimated_height": 496.9
+      "title": "1(e)-(f). CV outputs; supplemental forest evaluation",
+      "estimated_height": 624.4768274490303
     },
     {
       "section": 9,
       "title": "1(e). Full training and uncompensated XGBoost results",
-      "estimated_height": 496.98881153654895
+      "estimated_height": 671.188811536549
     },
     {
       "section": 10,
@@ -171,7 +171,7 @@
     {
       "section": 16,
       "title": "Q6 Extra Practice. ISLR 5.4.2: bootstrap inclusion",
-      "estimated_height": 536.9292227410052
+      "estimated_height": 537.16990753456
     },
     {
       "section": 17,
@@ -191,7 +191,7 @@
     {
       "section": 20,
       "title": "References, execution provenance and submission scope",
-      "estimated_height": 513.5
+      "estimated_height": 604.5
     }
   ],
   "includes_core_code_answers_outputs": true

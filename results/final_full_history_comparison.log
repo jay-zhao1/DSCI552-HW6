@@ -1,0 +1,61 @@
+{
+  "models": {
+    "rf_plain": {
+      "prediction_max_abs_difference": {
+        "train": 0.0,
+        "test": 0.0,
+        "test_train_only": 0.0
+      },
+      "selected_alpha_unchanged": true,
+      "metrics": {
+        "train": {},
+        "test": {},
+        "test_train_only_imputation": {}
+      }
+    },
+    "rf_balanced": {
+      "prediction_max_abs_difference": {
+        "train": 0.0,
+        "test": 0.0,
+        "test_train_only": 0.0
+      },
+      "selected_alpha_unchanged": true,
+      "metrics": {
+        "train": {},
+        "test": {},
+        "test_train_only_imputation": {}
+      }
+    },
+    "xgb_plain": {
+      "prediction_max_abs_difference": {
+        "train": 0.0,
+        "test": 0.0,
+        "test_train_only": 0.0
+      },
+      "selected_alpha_unchanged": true,
+      "metrics": {
+        "train": {},
+        "test": {},
+        "test_train_only_imputation": {}
+      },
+      "cv_max_abs_score_difference": 0.0
+    },
+    "xgb_smote": {
+      "prediction_max_abs_difference": {
+        "train": 0.0,
+        "test": 0.0,
+        "test_train_only": 0.0
+      },
+      "selected_alpha_unchanged": true,
+      "metrics": {
+        "train": {},
+        "test": {},
+        "test_train_only_imputation": {}
+      },
+      "cv_max_abs_score_difference": 0.0
+    }
+  },
+  "historical_artifacts_unchanged": 25,
+  "numerical_metrics_agree_to_1e_12": true,
+  "timings": "Fresh fit/CV times are new measurements and are not expected to equal history."
+}

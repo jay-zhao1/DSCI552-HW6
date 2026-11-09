@@ -13,7 +13,7 @@
     "Training scores refer to the original 60,000 observations"
   ],
   "all_passed": true,
-  "notebook_executed_code_cells": 30,
+  "notebook_executed_code_cells": 28,
   "notebook_errors": 0,
   "pdf_pages": 20,
   "pdf_within_20_page_limit": true,
@@ -21,12 +21,9 @@
   "report_sections_in_expected_pages": true,
   "extra_practice": {
     "all_passed": true,
-    "formal_notebook_code_and_outputs_unchanged": true,
-    "original_code_cells": 20,
-    "new_executed_code_cells": 8,
-    "notebook_errors": 0,
-    "original_experiment_files_hash_verified": 21,
-    "model_retraining_performed": false,
+    "source": "Fresh standalone clean-kernel execution",
+    "original_models_preserved": true,
+    "new_aps_training": false,
     "all_four_extra_exercises_complete": true,
     "exercise_statement_ambiguities": [],
     "main_report_pages": 20,
@@ -37,11 +34,10 @@
       18,
       19
     ],
-    "organization": "merged into main report",
     "bootstrap_and_ridge_numeric_checks_passed": true,
     "tree_grid_points_checked": 6561,
     "circle_classifications_verified": true,
-    "report_text_bounds_and_replacement_character_checks_passed": true
+    "verified_textbook_hashes_unchanged": true
   },
   "code_inclusive": {
     "all_passed": true,
@@ -131,11 +127,12 @@
         20
       ]
     },
-    "notebook_executed_code_cells": 30,
+    "notebook_executed_code_cells": 28,
     "notebook_errors": 0,
-    "previous_notebook_cells_preserved_verbatim": true,
+    "notebook_self_contained_clean_kernel_verified": true,
     "saved_experiment_files_unchanged": 25,
     "aps_models_retrained_this_revision": false,
+    "full_training_mode_executed": false,
     "core_equivalence_audit_passed": true,
     "format_audit": "No explicit local font/margin mandate found; chosen settings are documented.",
     "remaining_issue": "Original Q1(e-f) logistic model tree wording; standard gbtree interpretation explicitly distinguished."
@@ -163,10 +160,64 @@
       19,
       20
     ],
-    "all_final_pages_rendered": true,
-    "code_indentation_and_line_breaks_checked": true,
-    "formulas_and_chart_labels_checked": true,
+    "all_pages_rendered": true,
+    "formulas_code_indentation_labels_checked": true,
     "clipping_overlap_or_blank_pages_found": false,
-    "review_basis": "All five final contact sheets visually inspected after the final PDF rebuild; code/output lines also checked against selectable PDF text."
-  }
+    "browser_print_preview_directly_checked": false,
+    "browser_limitation": "Browser URL security policy refused local file:// PDF; no workaround attempted."
+  },
+  "standalone": {
+    "all_passed": true,
+    "self_contained_no_project_imports": true,
+    "clean_kernel_quick_execution": true,
+    "executed_code_cells": 28,
+    "errors": 0,
+    "cache_negative_tests": {
+      "data_signature_mismatch_rejected": true,
+      "config_signature_mismatch_rejected": true,
+      "code_signature_mismatch_rejected": true,
+      "version_signature_mismatch_rejected": true,
+      "missing_cache_explicit_error": true,
+      "missing_artifact_rejected": true,
+      "altered_artifact_hash_rejected": true
+    },
+    "full_mode_has_no_prior_cache_reads": true,
+    "full_mode_source_has_fresh_directory_guard": true,
+    "full_mode_training_executed": false,
+    "full_mode_validation_scope": "Static control-flow, constructor and fold/preprocessing equivalence checks only; no new APS/CV fitting.",
+    "saved_original_artifacts_unchanged": 25,
+    "fresh_predictions_and_metrics_checked": true,
+    "theory_results_recomputed_and_equal": true,
+    "aps_models_retrained": false,
+    "visual_qa": {
+      "reviewed_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "all_pages_rendered": true,
+      "formulas_code_indentation_labels_checked": true,
+      "clipping_overlap_or_blank_pages_found": false,
+      "browser_print_preview_directly_checked": false,
+      "browser_limitation": "Browser URL security policy refused local file:// PDF; no workaround attempted."
+    }
+  },
+  "pdf_sha256": "a8bd505623b6ee5abab1faf0c2ae0d6ad1bfb6eb790af5cd1ce5b6bab4940226"
 }

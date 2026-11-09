@@ -1,0 +1,126 @@
+{
+  "train": {
+    "n": 60000,
+    "error": 0.0,
+    "auc": 1.0,
+    "average_precision": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "confusion_matrix": [
+      [
+        59000,
+        0
+      ],
+      [
+        0,
+        1000
+      ]
+    ]
+  },
+  "test": {
+    "n": 16000,
+    "error": 0.010625,
+    "auc": 0.9945430186666667,
+    "average_precision": 0.8863318205503123,
+    "precision": 0.9399141630901288,
+    "recall": 0.584,
+    "f1": 0.7203947368421053,
+    "confusion_matrix": [
+      [
+        15611,
+        14
+      ],
+      [
+        156,
+        219
+      ]
+    ]
+  },
+  "test_train_only_imputation": {
+    "n": 16000,
+    "error": 0.0105625,
+    "auc": 0.9945439573333331,
+    "average_precision": 0.8867377632651356,
+    "precision": 0.9401709401709402,
+    "recall": 0.5866666666666667,
+    "f1": 0.722495894909688,
+    "confusion_matrix": [
+      [
+        15611,
+        14
+      ],
+      [
+        155,
+        220
+      ]
+    ]
+  },
+  "oob": {
+    "total": {
+      "n": 60000,
+      "valid": 60000,
+      "zero_votes": 0,
+      "valid_fraction": 1.0,
+      "min_votes": 144,
+      "max_votes": 228,
+      "mean_votes": 184.00173333333333
+    },
+    "by_class": {
+      "neg": {
+        "n": 59000,
+        "valid": 59000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 183.99642372881357
+      },
+      "pos": {
+        "n": 1000,
+        "valid": 1000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 151,
+        "max_votes": 214,
+        "mean_votes": 184.315
+      }
+    },
+    "all_zero_probability_rows": 0,
+    "nan_rows": 0,
+    "nonfinite_rows": 0,
+    "other_invalid_rows": 0,
+    "historical_unmasked_error": 0.0076166666666666666,
+    "valid_error": 0.0076166666666666666,
+    "valid_errors": 457,
+    "valid_denominator": 60000,
+    "full_class_coverage": true,
+    "warning_expected": false,
+    "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+    "treewise_probabilities_reconstructed": true
+  },
+  "fit_audit_evaluate_seconds": 41.7340748750139,
+  "parameters": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": "balanced_subsample",
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 500,
+    "n_jobs": 4,
+    "oob_score": true,
+    "random_state": 552,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "warnings": [],
+  "rationale": "Uniform bootstrap with per-tree balanced impurity weights permits both-class OOB coverage; supplementary, not a replacement."
+}

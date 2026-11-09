@@ -1,42 +1,37 @@
-# Homework 6 compliance checklist
+# Homework 6 final checklist
 
-Source: supplied two-page Homework6.pdf and APS description. No AGENTS.md was found in the project or its applicable ancestor directories. No course clarification or local textbook was present initially.
+Current authoritative verification: `results/oob_review_validation.json`; rendering review: `results/oob_visual_review.json`. Earlier numeric-only verification omitted balanced-OOB coverage and is superseded on that point. Earlier checklists/answers are preserved in `results/archive_before_final_bounded/`.
 
-- [x] 1(a): preserve official train/test; detect real CSV header and `na`; audit 170 numeric features, labels, order, counts, missingness and hashes.
-- [x] 1(b)(i): discuss imputation; separate train/test medians for footnote main results; fold-fitted train-only preprocessing in CV; train-only sensitivity.
-- [x] 1(b)(ii): all 170 sample CVs with ddof=1; zero/all-missing checks and stated fallback.
-- [x] 1(b)(iii): complete correlation matrix, large labeled export, CSV and indexed report figure.
-- [x] 1(b)(iv): top 13 CVs; full scatter matrix, readable report scatter panels and all class box plots; sampling/transform disclosure; answer significance question; all 170 retained for modeling.
-- [x] 1(b)(v): class counts in each official split; imbalance discussion.
-- [x] 1(c): uncompensated RF, train/test confusion, ROC/AUC/error; OOB versus test.
-- [x] 1(d): cited weighting rationale; matched RF settings and all metrics; positive precision/recall/F1/AP.
-- [x] 1(e): inspect installed XGBoost API and matching v3.4.1 docs; distinguish boosters/L1/model trees; transparent runnable interpretation.
-- [x] 1(e): full-data stratified 5-fold alpha search (0, .001, .01, .1, 1, 10, 100), prespecified mean AP selection, CV error, full final evaluations, no official-test tuning or early stopping.
-- [x] 1(f): full-data fold-local imputer -> scaler -> SMOTE -> XGB Pipeline; same alpha search; no downsampling; original-distribution validation/test; original-sample training evaluation; counts and timings.
-- [x] Q2: second-edition ISLR 6.6.3 (a)-(e), checked against author-provided textbook, nested-set proof and tradeoff explanation.
-- [x] Q3: second-edition ISLR 6.6.5 (a)-(d), ridge/lasso derivations and degeneracy qualifications.
-- [x] Q4: ISLR 8.4.5, ten red probabilities; hard vote and probability average with computed diagram.
-- [x] Q5: ISLR 9.7.3 (a)-(h), plotted data, hyperplanes, margin/support vectors, perturbation and nonseparability proof.
-- [x] Q6: all four Extra Practice exercises completed in English and merged into the main report; independent notebook heading `Question 6 — Extra Practice`.
-- [x] Q6 / ISLR 5.4.2 (a)-(h): first-edition pp.197-198, cross-checked second-edition pp.219-220; exact probabilities, all-integer curve through 100,000, actual 10,000-sample bootstrap simulation.
-- [x] Q6 / ISLR 6.8.4 (a)-(e): first-edition pp.260-261; second-edition equivalent is 6.6.4; optimality proof, variance/bias formulas, computed ridge illustration and qualifications.
-- [x] Q6 / ISLR 8.4.4 (a)-(b): first-edition Figure 8.12, second-edition Figure 8.14; reconstructed tree and partition; five mean values and all cuts checked on 6,561 points.
-- [x] Q6 / ISLR 9.7.2 (a)-(d): verified both editions; circle/interior/exterior, four query classifications and linear lifted-space formula.
-- [x] Final organization: main report exactly 20 pages including all references; Extra Practice on pp.12 and 16-19; no separate supplement required. Original 17-page report and notebook archived under results/pre_extra_practice.
-- [x] Earlier Extra Practice execution: eight new code cells were executed; Q1-5 code/outputs and original experiment checkpoints preserved. New figures rendered and reviewed; no model retraining, commits, pushes or external submissions.
+- [x] Original Homework6 and local course requirements read; no applicable AGENTS.md found in project/ancestor paths. No prescribed font/margin rule found.
+- [x] Existing worktree changes, original CSVs, 25 historical experiment/data artifacts and schema-1 cache preserved; no reset, commit, push or platform submission.
+- [x] Q1(a): official 60000/16000 datasets; preamble/header, na, labels, class counts, numeric types, 170-column order checked.
+- [x] Q1(b)(i): missing-data methods/rationale; separate test-own medians per footnote; distinct train-only sensitivity; no pooling/test-label preprocessing.
+- [x] Q1(b)(ii): all170 CVs with ddof=1; zero-mean/all-missing handling; top13 only for display.
+- [x] Q1(b)(iii): all170 correlation matrix displayed.
+- [x] Q1(b)(iv): all78 unordered top13 pairs appear once directly in PDF; full high-resolution matrix in notebook, legend/features/log1p/sample size/seed stated; scatter significance answered.
+- [x] Q1(b)(v): both splits' counts and imbalance discussed.
+- [x] Q1(c–d): both forests fit on all170 features; train/test CM/ROC/AUC/error; OOB comparison; balanced weights cited; minority metrics/AP and error tradeoff.
+- [x] Q1(e): complete 7×5 plain CV, AP/tie rule, actual CV errors, all-row final fit and train/test outputs. Unrestricted alpha=0; alpha0 explicitly means no L1 penalty.
+- [x] Q1(f): complete 7×5 SMOTE CV; fold-local imputer/scaler/SMOTE; original validation/test distribution; final118000 rows; training metrics on original60000; times/counts/settings and comparison.
+- [x] Positive-alpha supplement: same existing CV restriction/rule selects 0.01; independent full-row no-SMOTE fit/model/predictions/metrics; clearly not original optimum or test-based tuning.
+- [x] Q2 all(a–e), Q3 all(a–d), Q4 both aggregation rules, Q5 all(a–h) retained with derivations/figures.
+- [x] Q6 allfour statements/editions checked: bootstrap(a–h), ridge(a–e), tree(a–b), circle(a–d); actual computations/plots retained.
+- [x] Full isolated clean kernel: initially notebook + two CSVs only; 29 code cells, zero errors; 75 actual fits (2+70+2+1).
+- [x] Quick isolated clean kernel: 29 code cells, zero errors; fresh schema2 cache validated; no fit. Missing/mismatch rejection exercised; no re-signing historical artifacts.
+- [x] Notebook answers, timings, metrics, table differences and mode scope draw on current run; delivered outputs are the new coverage-aware quick execution; historical full outputs are archived.
+- [x] PDF/Notebook/README alpha, model metrics, CV, CM, params and execution provenance cross-checked. Fresh/historical comparison saved without altering history.
+- [x] Formal PDF 20 pages including necessary code, all answers, outputs and references; body10.4pt/code8.7pt unchanged; every page rendered and reviewed (see visual record).
+- [ ] Browser Print preview directly inspected: not performed; programmatic count and PDF rendering are separate checks.
+- [ ] Instructor clarification of genuine node-level logistic model tree versus standard gbtree leaf L1: still unresolved and accurately disclosed; positive alpha does not resolve it.
 
-Final execution, metrics, PDF pagination and visual QA are recorded in results/validation.json and results/report_layout.json after artifact generation.
+## Coverage-aware OOB correction
 
-
-## Corrected all-content submission requirement
-
-- [x] Re-read Homework6.pdf and checked the local syllabus/course introduction. No explicit font or margin rule found; layout choices are not claimed as instructor requirements.
-- [x] The single 20-page PDF now includes core actual Python code, English answers, required derivations, readable figures and actual necessary output, including references.
-- [x] Body 10.4 pt; Courier code 8.7 pt, 10.2 pt leading. Code is text with original indentation, measured line widths and no page-image shrinking.
-- [x] Real implementations are printed for header detection, label encoding, split-specific medians, all 170 CVs (ddof=1), correlation, scatter/box plots, common metrics, both forests/OOB, XGB constructor, fold-local imputer/scaler/SMOTE Pipeline, alpha search/selection and final original-sample evaluations.
-- [x] Explicit Pipeline.fit(X.iloc[tr], y[tr]) / predict_proba(X.iloc[va]) code prevents validation fitting/resampling. All fixed parameters, seed, threshold and 0/log-scale alpha grid are shown.
-- [x] Q2 (a)-(e), Q3 (a)-(d), Q4, Q5 (a)-(h), and Q6 bootstrap (a)-(h), ridge (a)-(e), tree (a)-(b), circle (a)-(d) all retained. See README for exact PDF pages.
-- [x] New compact implementation is audited against original estimator parameter dictionaries, fold memberships, preprocessing arrays, CV statistics and all saved metrics. RF/XGB fit is forbidden during audit; 25 saved experiment files retain their hashes.
-- [x] The previous 28 notebook code cells/outputs are unchanged; two new code cells execute compact lightweight computations and the audit, for 30 executed code cells total and zero errors.
-- [x] Old analysis-focused 20-page report/notebook/scripts backed up in results/archive_before_code_inclusive; root filenames are the current submission.
-- [x] Programmatic page count, all-snippet coverage, monospace font/line checks, result consistency and all 20 page renders checked. No commits, pushes or external submission performed.
+- [x] Every fitted tree's true bootstrap indices counted; root unique counts and treewise OOB probability reconstruction verified.
+- [x] Plain zero-vote0, valid60000/60000; balanced zero-vote1000, valid59000/60000, positive coverage0/1000 explicitly reported.
+- [x] All-zero/NaN/nonfinite/other invalid probability rows checked; warning attributed to balanced weighted sampling in installed1.9.1.
+- [x] Historical1199/60000 retained; valid199/59000 explicitly negative-only, never treated as overall OOB or compared with full test error.
+- [x] One separate500-tree balanced_subsample fit; complete both-class OOB coverage; valid457/60000 compared with official test error. Train/test CM/ROC/AUC/error and minority metrics included.
+- [x] No original RF/XGB/SMOTE/CV refit; original cache/manifests/historical model hashes unchanged.
+- [x] Independent OOB fingerprint/provenance, one-line post-fit-check migration audit, no-fit revalidation and cache rejection checks saved.
+- [x] Current self-contained notebook clean-kernel quick execution:31 code cells, zero errors; original OOB scope claims corrected.
+- [x] Final PDF20pages, font sizes unchanged, every page rendered and reviewed; all original and extra answers retained.

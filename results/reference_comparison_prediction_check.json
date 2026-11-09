@@ -1,0 +1,10 @@
+{
+  "all_passed": true,
+  "checks": [
+    "rf_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "rf_balanced: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "xgb_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "xgb_smote: parameters, all three prediction sets, metrics and CV/OOB verified"
+  ],
+  "validation_scope": "Serialized final-model predictions re-evaluated on all original train/test rows and train-only sensitivity. Saved 70 CV fold scores and alpha selection recomputed; CV estimators are not refitted in quick mode."
+}

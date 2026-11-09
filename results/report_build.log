@@ -126,7 +126,7 @@
     {
       "section": 7,
       "title": "1(e)-(f). XGBoost interpretation and fold-local Pipeline",
-      "estimated_height": 389.3545454545455
+      "estimated_height": 415.3545454545455
     },
     {
       "section": 8,
@@ -191,7 +191,7 @@
     {
       "section": 20,
       "title": "References, execution provenance and submission scope",
-      "estimated_height": 513.5
+      "estimated_height": 552.5
     }
   ],
   "includes_core_code_answers_outputs": true

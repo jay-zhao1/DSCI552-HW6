@@ -1,0 +1,120 @@
+{
+  "executed": true,
+  "mode": "full",
+  "clean_kernel": true,
+  "isolated_directory": "tmp/final_full_atu7gjjy",
+  "initial_files": [
+    "DSCI552_Homework6.ipynb",
+    "Homework 6 Data/aps_failure_test_set.csv",
+    "Homework 6 Data/aps_failure_training_set.csv"
+  ],
+  "no_scripts_or_references": true,
+  "code_cells": 29,
+  "errors": 0,
+  "aps_models_retrained": true,
+  "full_training_mode_executed": true,
+  "output_directory": "results/final_full_run",
+  "seconds": 758.2514197500423,
+  "notebook_sha256": "4d1c06fcd179b07be5ca976aac9e6beb7c7da466bee713e543683ea38c85cd9d",
+  "validation": {
+    "all_passed": true,
+    "checks": [
+      "rf_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "rf_balanced: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "xgb_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "xgb_smote: parameters, all three prediction sets, metrics and CV/OOB verified",
+      "xgb_positive: parameters, all three prediction sets, metrics and CV/OOB verified"
+    ],
+    "mode": "full",
+    "validation_scope": "Full mode: 2 forests, all 70 CV estimators, 2 selected final XGB models and 1 strictly-positive-alpha supplementary model fitted from raw data this run. All five final-model train/test/sensitivity predictions, metrics and RF OOB verified.",
+    "trained_from_raw_this_run": true,
+    "cache_signature": {
+      "schema": 2,
+      "data": {
+        "training": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da",
+        "test": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3"
+      },
+      "config": {
+        "seed": 552,
+        "threshold": 0.5,
+        "alphas": [
+          0.0,
+          0.001,
+          0.01,
+          0.1,
+          1.0,
+          10.0,
+          100.0
+        ],
+        "supplement": "plain search restricted alpha > 0, same AP and smaller-alpha tie rule",
+        "features": 170,
+        "cv_selection": "mean average precision; smaller-alpha tie break",
+        "imputation": {
+          "strategy": "median",
+          "keep_empty_features": true,
+          "main_test": "test-own medians",
+          "sensitivity": "train medians",
+          "cv": "training-fold only"
+        },
+        "rf": {
+          "n_estimators": 500,
+          "criterion": "gini",
+          "max_features": "sqrt",
+          "bootstrap": true,
+          "oob_score": true,
+          "max_depth": null,
+          "min_samples_leaf": 1,
+          "random_state": 552,
+          "n_jobs": 4
+        },
+        "xgb": {
+          "booster": "gbtree",
+          "objective": "binary:logistic",
+          "reg_lambda": 1,
+          "n_estimators": 250,
+          "max_depth": 4,
+          "learning_rate": 0.08,
+          "subsample": 1,
+          "colsample_bytree": 1,
+          "min_child_weight": 1,
+          "tree_method": "hist",
+          "max_bin": 256,
+          "n_jobs": 4,
+          "random_state": 552,
+          "eval_metric": "logloss",
+          "base_score": 0.5
+        },
+        "smote": {
+          "random_state": 552,
+          "k_neighbors": 5,
+          "sampling_strategy": 1.0
+        },
+        "cv": {
+          "n_splits": 5,
+          "shuffle": true,
+          "random_state": 552
+        }
+      },
+      "model_code_sha256": "4856e831818ff130e257cc1c0c5906675a12b6dc9a8d84059333df49b2f35ff2",
+      "versions": {
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "scikit-learn": "1.9.1",
+        "xgboost": "3.4.1",
+        "imbalanced-learn": "0.14.2",
+        "joblib": "1.6.0"
+      }
+    },
+    "cache_provenance": {
+      "mode": "full",
+      "trained_from_raw_this_run": true,
+      "note": "Five final models and all 70 CV fits executed from raw data; no previous cache read."
+    }
+  },
+  "training_fit_counts": {
+    "forest": 2,
+    "cv": 70,
+    "final_xgb": 2,
+    "positive_alpha_supplement": 1
+  }
+}

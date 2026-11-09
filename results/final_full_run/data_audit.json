@@ -1,0 +1,28 @@
+{
+  "training": {
+    "rows": 60000,
+    "features": 170,
+    "header_line_1based": 21,
+    "dtype": "float64",
+    "counts": {
+      "neg": 59000,
+      "pos": 1000
+    },
+    "missing_cells": 850015,
+    "all_missing_columns": [],
+    "sha256": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da"
+  },
+  "test": {
+    "rows": 16000,
+    "features": 170,
+    "header_line_1based": 21,
+    "dtype": "float64",
+    "counts": {
+      "neg": 15625,
+      "pos": 375
+    },
+    "missing_cells": 228680,
+    "all_missing_columns": [],
+    "sha256": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3"
+  }
+}

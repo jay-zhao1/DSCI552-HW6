@@ -14,5 +14,6 @@
   "execution_mode": "Only new Question 6 cells executed in a fresh kernel; original Q1-5 code and outputs preserved verbatim.",
   "original_code_cells_unchanged": true,
   "original_code_cells": 20,
-  "total_code_cells": 28
+  "total_code_cells": 28,
+  "historical_record_superseded_by": "standalone_notebook_execution.json"
 }

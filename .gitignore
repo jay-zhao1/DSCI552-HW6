@@ -1,0 +1,27 @@
+# Local environments and newly generated intermediates; tracked history is preserved.
+.venv/
+.DS_Store
+__pycache__/
+*.py[cod]
+tmp/
+# Historical/repeated working copies are local review backups, not new submissions.
+results/archive_*/
+results/notebook_runs/
+results/notebook_cache_v1/
+results/final_*_failed.ipynb
+results/final_*_run/Executed_*.ipynb
+# Keep one local set of fresh checkpoints; do not add large duplicate models to Git.
+results/final_*_run/model_artifacts/*.joblib
+results/final_quick_run/*_predictions.npz
+results/final_*_run/figures/correlation_all_labels.*
+results/final_*_run/figures/scatter_all13.*
+
+# Coverage-review sidecars and duplicate executed snapshots stay local.
+results/oob_review/artifacts*/
+
+results/oob*_quick_run/Executed_*.ipynb
+results/oob*_quick_run/*_predictions.npz
+results/oob*_quick_run/figures/scatter_all13.*
+results/oob*_quick_run/figures/correlation_all_labels.*
+
+/核对版/

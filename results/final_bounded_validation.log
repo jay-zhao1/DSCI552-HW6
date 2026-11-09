@@ -1,0 +1,103 @@
+Mode: quick | Output: results/notebook_runs/quick_20261109T023632_186299Z
+QUICK requires the separate matching cache bundle at results/final_full_run/model_artifacts
+Missing cache? Select full mode to train using only the two raw CSVs.
+Full fits 2 forests + 70 CV estimators + 2 selected XGBs + 1 positive-alpha supplement.
+{
+  "all_passed": true,
+  "full_mode_executed": true,
+  "quick_mode_executed": true,
+  "full_initial_files": [
+    "DSCI552_Homework6.ipynb",
+    "Homework 6 Data/aps_failure_test_set.csv",
+    "Homework 6 Data/aps_failure_training_set.csv"
+  ],
+  "full_fits": {
+    "forest": 2,
+    "cv": 70,
+    "final_xgb": 2,
+    "positive_alpha_supplement": 1
+  },
+  "full_code_cells": 29,
+  "quick_code_cells": 29,
+  "kernel_errors": 0,
+  "notebook_self_contained": true,
+  "cache_schema": 2,
+  "cache_from_fresh_full_run": true,
+  "cache_negative_tests": {
+    "data_mismatch_rejected": true,
+    "config_mismatch_rejected": true,
+    "model_code_sha256_mismatch_rejected": true,
+    "versions_mismatch_rejected": true,
+    "absent_cache_rejected": true,
+    "missing_artifact_rejected": true,
+    "altered_artifact_rejected": true
+  },
+  "historical_artifacts_unchanged": 25,
+  "positive_alpha": 0.01,
+  "original_alpha": 0.0,
+  "all_78_pairs_present": true,
+  "pdf_pages": 20,
+  "body_font_pt": 10.4,
+  "code_font_pt": 8.7,
+  "all_pdf_code_lines_and_numeric_tables_verified": true,
+  "core_code_lines": 292,
+  "visual_qa": {
+    "pdf_sha256": "9b39a47326e13a1741413467c3083f0ecb800d64c0a94ce12574f823e1eff69f",
+    "pages": 20,
+    "all_pages_rendered": true,
+    "render_scale": 1.5,
+    "reviewed_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "method": "Viewed all20 pages in five four-page contact sheets; enlarged pages2,3,9,13,20.",
+    "page_notes": {
+      "1": "Code, table and sample specification fit above footer.",
+      "2": "Correlation labels and complete helper indentation readable; no clipping.",
+      "3": "All78 triangular panels,13 feature names,class legend and sampling/log1p caption visible.",
+      "4": "All13 boxplots and class counts visible.",
+      "5": "Shared metrics/forest code and imputation rationale legible.",
+      "6": "Both train/test matrix and ROC panels, OOB table readable.",
+      "7": "Objective equation and fold-local Pipeline code legible.",
+      "8": "Both seven-alpha CV columns and search code fit.",
+      "9": "Plain outputs and positive-alpha selection/CM/error/AUC/CV table fit without overlap.",
+      "10": "SMOTE counts, metrics, matrix/ROC and timing comparison visible.",
+      "11": "Unified metrics, ROC/PR and sensitivity outputs readable.",
+      "12": "All five lasso and ridge subparts and equations intact.",
+      "13": "Ridge/lasso derivations, boundary qualifications and check output intact.",
+      "14": "Both vote rules and plotting helper visible.",
+      "15": "All eight geometry subparts and numbered diagrams visible.",
+      "16": "All bootstrap parts, exact table, curves and simulation output visible.",
+      "17": "Tree construction/traversal code indentation intact.",
+      "18": "Both trees/partitions and five-region table visible.",
+      "19": "Circle code,diagram,point classes and transformed hyperplane intact.",
+      "20": "References, version list and concise provenance fit above footer."
+    },
+    "clipping_overlap_blank_pages_or_formula_corruption_found": false,
+    "body_font_pt": 10.4,
+    "code_font_pt": 8.7,
+    "font_sizes_not_reduced": true,
+    "browser_print_preview_directly_checked": false,
+    "limitation": "Programmatic PDF count and rendered-page review; browser Print preview was not directly inspected."
+  },
+  "browser_print_preview_checked": false,
+  "remaining_issue": "Instructor clarification of node-level logistic model tree wording."
+}

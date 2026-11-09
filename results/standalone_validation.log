@@ -1,0 +1,26 @@
+Mode: quick | Output: results/notebook_runs/quick_20261107T081811_277739Z
+Quick verifies cached final models; full fits 2 forests + 70 CV estimators + 2 final XGBs.
+{
+  "all_passed": true,
+  "self_contained_no_project_imports": true,
+  "clean_kernel_quick_execution": true,
+  "executed_code_cells": 28,
+  "errors": 0,
+  "cache_negative_tests": {
+    "data_signature_mismatch_rejected": true,
+    "config_signature_mismatch_rejected": true,
+    "code_signature_mismatch_rejected": true,
+    "version_signature_mismatch_rejected": true,
+    "missing_cache_explicit_error": true,
+    "missing_artifact_rejected": true,
+    "altered_artifact_hash_rejected": true
+  },
+  "full_mode_has_no_prior_cache_reads": true,
+  "full_mode_source_has_fresh_directory_guard": true,
+  "full_mode_training_executed": false,
+  "full_mode_validation_scope": "Static control-flow, constructor and fold/preprocessing equivalence checks only; no new APS/CV fitting.",
+  "saved_original_artifacts_unchanged": 25,
+  "fresh_predictions_and_metrics_checked": true,
+  "theory_results_recomputed_and_equal": true,
+  "aps_models_retrained": false
+}

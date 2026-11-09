@@ -1,0 +1,13 @@
+Mode: quick | Output: results/notebook_runs/quick_20261109T040455_809669Z
+QUICK requires the separate matching cache bundle at results/final_full_run/model_artifacts
+Missing cache? Select full mode to train using only the two raw CSVs.
+Full fits 2 forests + 70 CV estimators + 2 selected XGBs + 1 positive-alpha supplement.
+Traceback (most recent call last):
+  File "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw6/scripts/run_oob_review.py", line 26, in <module>
+    if __name__=='__main__':run()
+                            ^^^^^
+  File "/Users/a0000/Desktop/mac/usc/2026fall/ds552/hw6/scripts/run_oob_review.py", line 23, in run
+    stats,score=ns['run_oob_review'](model_dir,x,y,t,yt,out,'fit_supplement',out/'artifacts')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 103, in run_oob_review
+AssertionError

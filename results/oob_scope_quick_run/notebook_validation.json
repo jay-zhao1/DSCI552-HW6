@@ -1,0 +1,228 @@
+{
+  "all_passed": true,
+  "checks": [
+    "rf_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "rf_balanced: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "xgb_plain: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "xgb_smote: parameters, all three prediction sets, metrics and CV/OOB verified",
+    "xgb_positive: parameters, all three prediction sets, metrics and CV/OOB verified"
+  ],
+  "mode": "quick",
+  "validation_scope": "Quick mode: no fitting. Validated cached final models re-evaluated; stored 70 CV fold scores summarized and alpha selection checked, not refitted. All five final-model train/test/sensitivity predictions, metrics verified; legacy unmasked OOB arithmetic only, not coverage validation.",
+  "oob_coverage_audits": {
+    "rf_plain": {
+      "total": {
+        "n": 60000,
+        "valid": 60000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 184.00173333333333
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 144,
+          "max_votes": 228,
+          "mean_votes": 183.99642372881357
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 1000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 151,
+          "max_votes": 214,
+          "mean_votes": 184.315
+        }
+      },
+      "all_zero_probability_rows": 0,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.005816666666666667,
+      "valid_error": 0.005816666666666667,
+      "valid_errors": 349,
+      "valid_denominator": 60000,
+      "full_class_coverage": true,
+      "warning_expected": false,
+      "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+      "treewise_probabilities_reconstructed": true
+    },
+    "rf_balanced": {
+      "total": {
+        "n": 60000,
+        "valid": 59000,
+        "zero_votes": 1000,
+        "valid_fraction": 0.9833333333333333,
+        "min_votes": 0,
+        "max_votes": 347,
+        "mean_votes": 295.62905
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 251,
+          "max_votes": 347,
+          "mean_votes": 300.63971186440676
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 0,
+          "zero_votes": 1000,
+          "valid_fraction": 0.0,
+          "min_votes": 0,
+          "max_votes": 0,
+          "mean_votes": 0.0
+        }
+      },
+      "all_zero_probability_rows": 1000,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.019983333333333332,
+      "valid_error": 0.0033728813559322033,
+      "valid_errors": 199,
+      "valid_denominator": 59000,
+      "full_class_coverage": false,
+      "warning_expected": true,
+      "bootstrap_indices_sha256": "3b3634ee7d422e0a3ccbf8b61ff2fbdde625bcc3bb5f02dab7a55871ab2a45ea",
+      "treewise_probabilities_reconstructed": true
+    },
+    "rf_balanced_subsample": {
+      "total": {
+        "n": 60000,
+        "valid": 60000,
+        "zero_votes": 0,
+        "valid_fraction": 1.0,
+        "min_votes": 144,
+        "max_votes": 228,
+        "mean_votes": 184.00173333333333
+      },
+      "by_class": {
+        "neg": {
+          "n": 59000,
+          "valid": 59000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 144,
+          "max_votes": 228,
+          "mean_votes": 183.99642372881357
+        },
+        "pos": {
+          "n": 1000,
+          "valid": 1000,
+          "zero_votes": 0,
+          "valid_fraction": 1.0,
+          "min_votes": 151,
+          "max_votes": 214,
+          "mean_votes": 184.315
+        }
+      },
+      "all_zero_probability_rows": 0,
+      "nan_rows": 0,
+      "nonfinite_rows": 0,
+      "other_invalid_rows": 0,
+      "historical_unmasked_error": 0.0076166666666666666,
+      "valid_error": 0.0076166666666666666,
+      "valid_errors": 457,
+      "valid_denominator": 60000,
+      "full_class_coverage": true,
+      "warning_expected": false,
+      "bootstrap_indices_sha256": "c58395271ec2173a97978e04d02caf94a68694290a5f940e6930e81e06d5e43a",
+      "treewise_probabilities_reconstructed": true
+    }
+  },
+  "oob_scope": "Coverage-aware masks and per-class counts supersede legacy unmasked OOB claims.",
+  "supplemental_rf_trained_this_run": false,
+  "trained_from_raw_this_run": false,
+  "cache_signature": {
+    "schema": 2,
+    "data": {
+      "training": "bb484302e3a3a1c8ef5e1f0129c4dc7cbd58f350867f95b575461ca21ab6b9da",
+      "test": "2cdf6f7661c7b4c63333c93cdec36a3a82350176b604a2312cf82799fb2712f3"
+    },
+    "config": {
+      "seed": 552,
+      "threshold": 0.5,
+      "alphas": [
+        0.0,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0
+      ],
+      "supplement": "plain search restricted alpha > 0, same AP and smaller-alpha tie rule",
+      "features": 170,
+      "cv_selection": "mean average precision; smaller-alpha tie break",
+      "imputation": {
+        "strategy": "median",
+        "keep_empty_features": true,
+        "main_test": "test-own medians",
+        "sensitivity": "train medians",
+        "cv": "training-fold only"
+      },
+      "rf": {
+        "n_estimators": 500,
+        "criterion": "gini",
+        "max_features": "sqrt",
+        "bootstrap": true,
+        "oob_score": true,
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "random_state": 552,
+        "n_jobs": 4
+      },
+      "xgb": {
+        "booster": "gbtree",
+        "objective": "binary:logistic",
+        "reg_lambda": 1,
+        "n_estimators": 250,
+        "max_depth": 4,
+        "learning_rate": 0.08,
+        "subsample": 1,
+        "colsample_bytree": 1,
+        "min_child_weight": 1,
+        "tree_method": "hist",
+        "max_bin": 256,
+        "n_jobs": 4,
+        "random_state": 552,
+        "eval_metric": "logloss",
+        "base_score": 0.5
+      },
+      "smote": {
+        "random_state": 552,
+        "k_neighbors": 5,
+        "sampling_strategy": 1.0
+      },
+      "cv": {
+        "n_splits": 5,
+        "shuffle": true,
+        "random_state": 552
+      }
+    },
+    "model_code_sha256": "4856e831818ff130e257cc1c0c5906675a12b6dc9a8d84059333df49b2f35ff2",
+    "versions": {
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "scikit-learn": "1.9.1",
+      "xgboost": "3.4.1",
+      "imbalanced-learn": "0.14.2",
+      "joblib": "1.6.0"
+    }
+  },
+  "cache_provenance": {
+    "mode": "full",
+    "trained_from_raw_this_run": true,
+    "note": "Five final models and all 70 CV fits executed from raw data; no previous cache read."
+  }
+}

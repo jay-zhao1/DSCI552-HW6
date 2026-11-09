@@ -1,0 +1,198 @@
+{
+  "pages": 20,
+  "body_font_pt": 10.4,
+  "code_font_pt": 8.7,
+  "code_leading_pt": 10.2,
+  "margins_pt": {
+    "left": 36,
+    "right": 36,
+    "top": 32,
+    "bottom": 38
+  },
+  "core_code_lines_printed": 308,
+  "sections": [
+    {
+      "title": "1(a)-(b)(ii). Data, imputation and feature statistics",
+      "page": 1
+    },
+    {
+      "title": "1(b)(iii). Correlation and shared scatter-matrix code",
+      "page": 2
+    },
+    {
+      "title": "1(b)(iv). Scatter plots: the 13 highest-CV features",
+      "page": 3
+    },
+    {
+      "title": "1(b)(iv)-(v). Box plots and imbalance",
+      "page": 4
+    },
+    {
+      "title": "1(c)-(d). Common evaluation and forest training code",
+      "page": 5
+    },
+    {
+      "title": "1(c)-(d). Forest outputs and OOB comparison",
+      "page": 6
+    },
+    {
+      "title": "1(e)-(f). Pipeline; coverage-aware RF OOB review",
+      "page": 7
+    },
+    {
+      "title": "1(e)-(f). CV outputs; supplemental forest evaluation",
+      "page": 8
+    },
+    {
+      "title": "1(e). Full training and uncompensated XGBoost results",
+      "page": 9
+    },
+    {
+      "title": "1(f). Full-data SMOTE + XGBoost results",
+      "page": 10
+    },
+    {
+      "title": "1(c)-(f). Unified comparison and imputation sensitivity",
+      "page": 11
+    },
+    {
+      "title": "Q2 and Q6 ridge: all regularization subparts",
+      "page": 12
+    },
+    {
+      "title": "Q3. ISLR 6.6.5: identical predictors and solutions",
+      "page": 13
+    },
+    {
+      "title": "Q4. ISLR 8.4.5: bootstrap votes vs mean probability",
+      "page": 14
+    },
+    {
+      "title": "Q5. ISLR 9.7.3: maximal-margin geometry (a)-(h)",
+      "page": 15
+    },
+    {
+      "title": "Q6 Extra Practice. ISLR 5.4.2: bootstrap inclusion",
+      "page": 16
+    },
+    {
+      "title": "Q6 Extra Practice. ISLR 8.4.4: executable tree/region code",
+      "page": 17
+    },
+    {
+      "title": "Q6 Extra Practice. ISLR 8.4.4: diagrams and answers",
+      "page": 18
+    },
+    {
+      "title": "Q6 Extra Practice. ISLR 9.7.2: nonlinear boundary",
+      "page": 19
+    },
+    {
+      "title": "References, execution provenance and submission scope",
+      "page": 20
+    }
+  ],
+  "estimates": [
+    {
+      "section": 1,
+      "title": "1(a)-(b)(ii). Data, imputation and feature statistics",
+      "estimated_height": 634.6
+    },
+    {
+      "section": 2,
+      "title": "1(b)(iii). Correlation and shared scatter-matrix code",
+      "estimated_height": 688.1945717732208
+    },
+    {
+      "section": 3,
+      "title": "1(b)(iv). Scatter plots: the 13 highest-CV features",
+      "estimated_height": 674.5641337386018
+    },
+    {
+      "section": 4,
+      "title": "1(b)(iv)-(v). Box plots and imbalance",
+      "estimated_height": 609.4976520811099
+    },
+    {
+      "section": 5,
+      "title": "1(c)-(d). Common evaluation and forest training code",
+      "estimated_height": 665.9
+    },
+    {
+      "section": 6,
+      "title": "1(c)-(d). Forest outputs and OOB comparison",
+      "estimated_height": 609.6536548980607
+    },
+    {
+      "section": 7,
+      "title": "1(e)-(f). Pipeline; coverage-aware RF OOB review",
+      "estimated_height": 647.3545454545455
+    },
+    {
+      "section": 8,
+      "title": "1(e)-(f). CV outputs; supplemental forest evaluation",
+      "estimated_height": 624.4768274490303
+    },
+    {
+      "section": 9,
+      "title": "1(e). Full training and uncompensated XGBoost results",
+      "estimated_height": 671.188811536549
+    },
+    {
+      "section": 10,
+      "title": "1(f). Full-data SMOTE + XGBoost results",
+      "estimated_height": 505.388811536549
+    },
+    {
+      "section": 11,
+      "title": "1(c)-(f). Unified comparison and imputation sensitivity",
+      "estimated_height": 606.0208756006407
+    },
+    {
+      "section": 12,
+      "title": "Q2 and Q6 ridge: all regularization subparts",
+      "estimated_height": 531.5
+    },
+    {
+      "section": 13,
+      "title": "Q3. ISLR 6.6.5: identical predictors and solutions",
+      "estimated_height": 534.6636363636363
+    },
+    {
+      "section": 14,
+      "title": "Q4. ISLR 8.4.5: bootstrap votes vs mean probability",
+      "estimated_height": 542.8175282234106
+    },
+    {
+      "section": 15,
+      "title": "Q5. ISLR 9.7.3: maximal-margin geometry (a)-(h)",
+      "estimated_height": 620.6870759289176
+    },
+    {
+      "section": 16,
+      "title": "Q6 Extra Practice. ISLR 5.4.2: bootstrap inclusion",
+      "estimated_height": 537.16990753456
+    },
+    {
+      "section": 17,
+      "title": "Q6 Extra Practice. ISLR 8.4.4: executable tree/region code",
+      "estimated_height": 517.5
+    },
+    {
+      "section": 18,
+      "title": "Q6 Extra Practice. ISLR 8.4.4: diagrams and answers",
+      "estimated_height": 631.8087685100764
+    },
+    {
+      "section": 19,
+      "title": "Q6 Extra Practice. ISLR 9.7.2: nonlinear boundary",
+      "estimated_height": 634.6992619926199
+    },
+    {
+      "section": 20,
+      "title": "References, execution provenance and submission scope",
+      "estimated_height": 604.5
+    }
+  ],
+  "includes_core_code_answers_outputs": true
+}
