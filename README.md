@@ -130,3 +130,7 @@ The notebook imports no project modules. Build-time sources are embedded by `scr
 ```
 
 Backups preceding this revision are in `results/archive_before_final_bounded/`. `.gitignore` excludes new virtual environments, temporary staging, backups and duplicate/large checkpoint artifacts. Existing tracked history is preserved; nothing was staged or committed. The baseline worktree already contained changes after 4baf619 and they were not reset.
+**AI Usage Disclosure**
+I used AI tools to help me learn the relevant programming techniques and machine learning concepts, understand code implementations, and assist with debugging.
+
+
